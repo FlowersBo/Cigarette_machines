@@ -1,0 +1,68 @@
+<!--index.wxml-->
+<cu-custom bgColor="bg-user-color" class="custom">
+  <view slot="content">商品</view>
+</cu-custom>
+<scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
+  style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
+  bindtoload="toload">
+  <view class="commodityWrap">
+    <view class="commodity">
+      <swiper class="card-swiper round-dot" current="{{cardCur}}" indicator-dots="true" bindchange="cardSwiper"
+        indicator-color="#8799a3" indicator-active-color="#FF9900">
+        <swiper-item wx:for="{{deviceList}}" wx:key="index" item-id="{{item.deviceId}}"
+          class="{{cardCur==index?'cur':''}}">
+          <view class="swiper-item">
+            <image class="swiper_img" src="/resource/img/background_home.png"></image>
+            <view class="style-roll">
+              <view class="on_lineStateWrap">
+                <view class="iconWrap">
+                  <image class="icon_img" style="width:30rpx; height:30rpx; margin-top:6rpx;" mode="scaleToFill"
+                    src="/resource/img/device.png"></image>
+                  <view class="serialNumber">出厂编号：{{item.factoryNO}}</view>
+                </view>
+                <view class="{{item.lineStateColor}}">{{item.isOnline}}</view>
+              </view>
+              <view class="on_lineStateWrap">
+                <image class="icon_img" style="width:30rpx; height:30rpx; margin-top:6rpx;" mode="scaleToFill"
+                  src="/resource/img/operator.png"></image>
+                <view class="serialNumber">运营商编号：{{item.deviceId}}</view>
+              </view>
+              <view class="on_lineStateWrap">
+                <image class="icon_img" style="width:30rpx; height:34rpx; margin-top:6rpx;" mode="scaleToFill"
+                  src="/resource/img/location.png"></image>
+                <view class="serialNumber">点位名称：{{pointName}}</view>
+              </view>
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
+      <view class="goodsRoadWrap">
+        <view class="goodsRoad">
+          <view class="goodsNav">
+            <view class="goodsNav_item" wx:for="{{goodsNavTitle}}" wx:key="index">{{item}}</view>
+          </view>
+          <view class="goodsListWrap">
+            <view class="goodsList" wx:for="{{goodsRoadList}}" wx:key="index">
+              <view class="goodsList_item">{{item.showNo}}</view>
+              <view class="goodsList_item">
+                <view class="goodsNameWrap" data-id="{{item.id}}" bindtap="selectGoodsFn">
+                  <view class="goodsName" data-id="{{item.id}}">{{item.productName}}</view>
+                  <image class="bottom_img" src="/resource/img/bootom.png"></image>
+                </view>
+              </view>
+              <view class="goodsList_item">
+                <view class="stock compute {{item.isSub}}" data-id="{{item.id}}" data-quan="{{item.stock}}"
+                  data-mark="sub" bindtap="btn_sub">-</view>
+                <view class="stock">{{item.stock}}</view>
+                <view class="stock compute {{item.isAdd}}" data-id="{{item.id}}" data-quan="{{item.stock}}"
+                  data-mark="add" bindtap="btn_add">+</view>
+                <view class="computeTen {{item.isAdd}}" data-id="{{item.id}}" bindtap="productTenFn">10</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</scroll-y>

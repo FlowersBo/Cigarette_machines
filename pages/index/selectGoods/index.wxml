@@ -1,0 +1,41 @@
+<!--pages/index/selectGoods/index.wxml-->
+<cu-custom bgColor="bg-user-color" isBack="true" class="custom">
+  <view slot="content">选择商品</view>
+  <view slot="backText">返回</view>
+</cu-custom>
+<scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
+  style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
+  bindtoload="toload">
+  <view class="selectGoodsWrap">
+    <view class="selectGoods">
+      <view class="con">
+        <view class="device">
+          <input type="text" confirm-type="search" placeholder="商品编号/商品名称" placeholder-style="color: #ccc;"
+            value="{{serchContent}}" bindconfirm="bindPointSerch" />
+          <icon class="iconfont iconfangdajing"></icon>
+        </view>
+      </view>
+      <view class="goodsListWrap">
+        <view class="goodsList">
+          <view class="goodsNav">
+            <view class="nav-item" wx:for="{{goodsNav}}" wx:key="index">
+              {{item}}
+            </view>
+          </view>
+          <view class="goods {{index%2==0?'bac_a':''}}" wx:for="{{goodsList}}" wx:key="index" 
+          data-id="{{item.id}}" bindtap="selectGoods">
+            <view class="goods-item">
+              {{item.id}}
+            </view>
+            <view class="goods-item">
+              {{item.productname}}
+            </view>
+            <view class="goods-item">
+              {{item.price}}元
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-y>

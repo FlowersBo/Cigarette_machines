@@ -1,0 +1,35 @@
+<!--pages/login/index.wxml-->
+<cu-custom bgColor="bg-login-color" class="custom">
+  <view slot="content">智能售烟柜</view>
+</cu-custom>
+<view class="loginWrap">
+  <view class="login_head_img">
+    <image mode="aspectFill" src="/resource/img/background_img.png"></image>
+  </view>
+  <view class="login">
+    <view class="loginTitle">
+      店员登录
+      <view class="mask"></view>
+    </view>
+    <form bindsubmit="formSubmit">
+      <view class="phone-box">
+        <icon class="iconfont icon iconshouji"></icon>
+        <input name="phoneNumber" type="number" value="{{phoneNumber}}" placeholder="请输入手机号" placeholder-style="color:#B3B3B3;" maxlength="11"
+          class="number phoneNumber" bindinput="bindInputPhoneNumber" />
+        <icon class="iconfont iconshanchu1 {{delete}}" bindtap="deleteFn"></icon>
+      </view>
+
+      <view class="phone-box">
+        <icon class="iconfont icon iconyanzhengma"></icon>
+        <!-- placeholder-style="color:#bbb" -->
+        <input name="verificationCode" type="number" placeholder="请输入验证码" placeholder-style="color:#B3B3B3;" maxlength="6" class="number"
+          bindinput="bindInputVerificationCode" />
+        <view bindtap="getVerificationCode" class="getNum {{isRepeatGetNum}}" hover-class="getNum_hover"
+          hover-stay-time="100">
+          {{verificationControlText}}</view>
+      </view>
+
+      <button class="btn" form-type="submit">立即登录</button>
+    </form>
+  </view>
+</view>
