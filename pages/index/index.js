@@ -122,18 +122,23 @@ Page({
             for (const key in goodsRoadList) {
               if (goodsRoadList.hasOwnProperty(key)) {
                 const element = goodsRoadList[key];
-                if (element.stock >= 10) {
-                  element.isAdd = 'isAdd';
-                } else {
-                  element.isAdd = '';
-                }
+                // if (element.stock > 10) {
+                //   element.isAdd = 'isAdd';
+                // } else {
+                //   element.isAdd = '';
+                // }
                 if (element.stock <= 0) {
                   element.isSub = 'isSub';
                 } else {
                   element.isSub = '';
                 }
                 if (element.productId === '0') {
-                  element.productName = '请选择商品'
+                  element.productName = '请选择商品',
+                    element.productColor = 'grayness',
+                    element.isAdd = 'isAdd'
+                } else {
+                  element.productColor = '',
+                    element.isAdd = ''
                 }
                 // element.showNo = element.showNo.slice(-1);
               }
@@ -209,8 +214,9 @@ Page({
             if (goodsRoadList.hasOwnProperty(key)) {
               const element = goodsRoadList[key];
               if (element.id === id) {
-                element.stock = 10;
-                element.isAdd = 'isAdd';
+                element.stock = res.data.data.stock;
+                element.isSub = '';
+                // element.isAdd = 'isAdd';
               }
             }
           }
@@ -260,11 +266,11 @@ Page({
               const element = goodsRoadList[key];
               if (element.id === id) {
                 element.stock = res.data.data.stock;
-                if (res.data.data.stock >= 10) {
-                  element.isAdd = 'isAdd';
-                } else {
-                  element.isAdd = '';
-                }
+                // if (res.data.data.stock >= 10) {
+                //   element.isAdd = 'isAdd';
+                // } else {
+                //   element.isAdd = '';
+                // }
                 if (res.data.data.stock <= 0) {
                   element.isSub = 'isSub';
                 } else {
@@ -324,16 +330,9 @@ Page({
     let id = e.currentTarget.dataset.id;
     let quan = e.currentTarget.dataset.quan;
     let mark = e.currentTarget.dataset.mark;
-    console.log(quan);
-    if (quan < 10) {
-      quan++;
-      that.edit_cart(id, mark, quan);
-    } else {
-      that.setData({
-
-      })
-      return;
-    }
+    let isadd = e.currentTarget.dataset.isadd;
+    quan++;
+    that.edit_cart(id, mark, quan);
   },
 
   selectGoodsFn: (e) => {

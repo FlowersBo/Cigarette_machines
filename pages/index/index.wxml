@@ -42,7 +42,7 @@
             <view class="goodsNav_item" wx:for="{{goodsNavTitle}}" wx:key="index">{{item}}</view>
           </view>
           <view class="goodsListWrap">
-            <view class="goodsList" wx:for="{{goodsRoadList}}" wx:key="index">
+            <view class="goodsList {{item.productColor}}" wx:for="{{goodsRoadList}}" wx:key="index">
               <view class="goodsList_item">{{item.showNo}}</view>
               <view class="goodsList_item">
                 <view class="goodsNameWrap" data-id="{{item.id}}" bindtap="selectGoodsFn">
@@ -54,7 +54,7 @@
                 <view class="stock compute {{item.isSub}}" data-id="{{item.id}}" data-quan="{{item.stock}}"
                   data-mark="sub" bindtap="btn_sub">-</view>
                 <view class="stock">{{item.stock}}</view>
-                <view class="stock compute {{item.isAdd}}" data-id="{{item.id}}" data-quan="{{item.stock}}"
+                <view class="stock compute {{item.isAdd}}" data-isadd="{{item.isAdd}}" data-id="{{item.id}}" data-quan="{{item.stock}}"
                   data-mark="add" bindtap="btn_add">+</view>
                 <view class="computeTen {{item.isAdd}}" data-id="{{item.id}}" bindtap="productTenFn">10</view>
               </view>
