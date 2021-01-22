@@ -17,6 +17,9 @@ Component({
     push: {
       type: Object,
       value: {}
+    },
+    scrollTopNum: {
+      type: Number
     }
   },
   /**组件所在页面的生命周期声明对象 */
@@ -37,8 +40,18 @@ Component({
     slideStart: [],
     moveTime: 0,
   },
+
+
   /**自定义方法 */
   methods: {
+
+    ready: function (scrollTopNum) {
+      console.log(scrollTopNum);
+      this.setData({
+        scrollTopNum: scrollTopNum
+      })
+    },
+
     /**开始滑动 */
     touchstart(e) {
       /**记录开始滑动的时间 */
@@ -46,6 +59,16 @@ Component({
         slideStart: e.touches[0]
       })
     },
+
+    // 获取滚动条当前位置
+    scrolltoupper: function (e) {
+      let scrollTop = e.detail.scrollTop;
+      this.triggerEvent('scrollTopFn', {
+        scrollTop: scrollTop
+      })
+    },
+
+
     /**滑动 */
     touchmove(e) {
       let moveTime = new Date().getTime(); // 当前时间

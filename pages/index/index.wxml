@@ -2,9 +2,9 @@
 <cu-custom bgColor="bg-user-color" class="custom">
   <view slot="content">商品</view>
 </cu-custom>
-<scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
+<scroll-y id='countdown' class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
   style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
-  bindtoload="toload">
+  bindtoload="toload" bindscrollTopFn="scrollTopFn" topNum="{{scrollTopNum}}">
   <view class="commodityWrap">
     <view class="commodity">
       <swiper class="card-swiper round-dot" current="{{cardCur}}" indicator-dots="true" bindchange="cardSwiper"
@@ -36,7 +36,7 @@
           </view>
         </swiper-item>
       </swiper>
-      <view class="goodsRoadWrap">
+      <view class="goodsRoadWrap" id="index-nav">
         <view class="goodsRoad">
           <view class="goodsNav">
             <view class="goodsNav_item" wx:for="{{goodsNavTitle}}" wx:key="index">{{item}}</view>

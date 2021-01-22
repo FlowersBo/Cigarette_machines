@@ -6,7 +6,9 @@ Page({
     // navState: 0, //导航状态
     cardCur: 0,
     pageIndex: '1',
-    pageSize: '30',
+    pageSize: '60',
+    deviceId: '',
+    selectGoodsDeviceId: false, //选择返回
     goodsNavTitle: ['货道', '商品名称', '当前库存'],
     goodsRoadList: [],
     isFlag: false,
@@ -21,6 +23,7 @@ Page({
       pullText: ''
     },
   },
+
   //监听滑块
   cardSwiper(e) {
     console.log(e)
@@ -29,16 +32,13 @@ Page({
       cardCur: e.detail.current,
       deviceId: deviceId,
       goodsRoadList: [],
-      pageIndex: '1'
+      pageIndex: '1',
+      selectGoodsDeviceId: false
     })
     that.goodsRoadFn(that.data.pageIndex, deviceId);
   },
 
-  // DotStyle(e) {
-  //   this.setData({
-  //     DotStyle: e.detail.value
-  //   })
-  // },
+
   onLoad: function () {
     that = this;
     that.facilityFn();
@@ -48,6 +48,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    console.log('onReady')
     const query = wx.createSelectorQuery().in(this)
     query.selectAll('.custom').boundingClientRect(function (res) {
       const customHeight = res[0].height;
@@ -55,6 +56,7 @@ Page({
         customHeight: customHeight
       })
     }).exec()
+    that.selectComponent = that.selectComponent('#countdown');
   },
 
   facilityFn: () => {
@@ -107,7 +109,7 @@ Page({
 
   goodsRoadFn: (pageIndex, deviceId) => {
     const data = {
-      pageSize: '30',
+      pageSize: '60',
       pageIndex,
       deviceId
     };
@@ -133,12 +135,20 @@ Page({
                 if (element.productId === '0') {
                   element.productName = '请选择商品'
                 }
-                element.showNo = element.showNo.slice(-1);
+                // element.showNo = element.showNo.slice(-1);
               }
             }
           }
-          goodsRoadList = that.data.goodsRoadList.concat(goodsRoadList);
-          if (goodsRoadList.length >= 30) {
+          // goodsRoadList = that.data.goodsRoadList.concat(goodsRoadList);
+          // function compare(property) {//排序
+          //   return function (a, b) {
+          //     var value1 = a[property];
+          //     var value2 = b[property];
+          //     return value1 - value2;
+          //   }
+          // }
+          // goodsRoadList.sort(compare('showNo'));
+          if (goodsRoadList.length >= 60) {
             const pullText = '- 上拉加载更多 -'
             that.setData({
               'push.pullText': pullText,
@@ -158,6 +168,11 @@ Page({
             goodsRoadList: goodsRoadList,
             count: res.data.data.count
           });
+          if (goodsRoadList.length > 9 && that.data.selectGoodsDeviceId) {
+            let scrollTopNum = that.data.scrollTopNum;
+            console.log(scrollTopNum)
+            that.selectComponent.ready(scrollTopNum);
+          }
         } else {
           wx.showToast({
             title: res.data.message,
@@ -329,7 +344,11 @@ Page({
         // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
         acceptDataFromOpenedPage: function (data) {
           let result = data.data;
-          console.log(result)
+          console.log('返回的', result);
+          // let selectGoodsDeviceId = result.deviceId;
+          that.setData({
+            selectGoodsDeviceId: true
+          })
           let e = {
             detail: {
               currentItemId: '',
@@ -338,7 +357,21 @@ Page({
           }
           e.detail.currentItemId = result.deviceId;
           e.detail.current = result.cardCur;
-          that.cardSwiper(e);
+          that.goodsRoadFn(that.data.pageIndex, result.deviceId);
+          // that.cardSwiper(e);
+
+
+          // let scrollHeight = that.data.scrollHeight;
+          // setTimeout(function () {
+          //   console.log('高度', that.data.scrollHeight);
+          //   wx.pageScrollTo({
+          //     scrollTop: -1000,
+          //     selector: '#index-nav',
+          //     complete: e => {
+          //       console.log(e)
+          //     }
+          //   })
+          // }, 5000)
         },
       },
       success: function (res) {
@@ -354,6 +387,16 @@ Page({
     })
 
   },
+
+  scrollTopFn(e) {
+    console.log(e.detail.scrollTop);
+    if (e.detail.scrollTop > 0) {
+      that.setData({
+        scrollTopNum: e.detail.scrollTop
+      })
+    }
+  },
+
 
   refresh() {
     that.setData({
@@ -409,8 +452,18 @@ Page({
     }
   },
 
-  onShow: function () {
 
+  onShow: function () {
+    // console.log('onShow')
+    // setTimeout(function(){
+    //   wx.pageScrollTo({
+    //     scrollTop: -100,
+    //     selector: '#index-nav',
+    //     complete: e => {
+    //       console.log(e)
+    //     }
+    //   })
+    // },2000)
   },
 
   /**

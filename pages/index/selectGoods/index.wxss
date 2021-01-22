@@ -82,6 +82,10 @@
 .goods-item {
   text-align: center;
   flex: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
 }
 
 .nav-item:nth-child(2),

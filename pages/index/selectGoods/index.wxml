@@ -25,7 +25,7 @@
           <view class="goods {{index%2==0?'bac_a':''}}" wx:for="{{goodsList}}" wx:key="index" 
           data-id="{{item.id}}" bindtap="selectGoods">
             <view class="goods-item">
-              {{item.id}}
+              {{item.productno}}
             </view>
             <view class="goods-item">
               {{item.productname}}

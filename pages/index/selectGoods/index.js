@@ -49,9 +49,10 @@ Page({
           console.log(Boolean(pageIndex * that.data.pageSize >= count));
           if (pageIndex * that.data.pageSize >= count) {
             let selectDetail = {
-              id: 0,
+              productno: 0,
               productname: '请选择商品',
-              price: 0
+              price: 0,
+              id: 0
             }
             // goodsList.unshift(selectDetail);
             goodsList.push(selectDetail);
