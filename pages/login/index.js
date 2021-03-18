@@ -29,7 +29,7 @@ Page({
           });
           console.log('登录信息未过期，自动登录');
         }
-      })
+      });
   },
 
   deleteFn: () => {
@@ -50,7 +50,7 @@ Page({
         delete: 'delete'
       })
     }
-    console.log('手机号', phoneNumber);
+    // console.log('手机号', phoneNumber);
     that.setData({
       phoneNumber: phoneNumber
     })
@@ -184,34 +184,41 @@ Page({
       })
       return;
     } else {
-      let loginInfo = {
-        username: parseInt(phoneNumber),
-        smscode: verificationCode
-      };
-      mClient.loginPhone(loginInfo)
-        .then((resp) => {
-          console.log('登录返回', resp);
-          if (resp.data.code == 200) {
-            wx.switchTab({
-              url: '../user/index'
-            });
-          } else if (resp.data.message) {
-            wx.showToast({
-              title: resp.data.message,
-              icon: 'none',
-              duration: 1000
-            });
-          }
+      mClient.login()
+        .then(resp => {
+          console.log('js_code', resp);
+          let loginInfo = {
+            username: parseInt(phoneNumber),
+            smscode: verificationCode,
+            js_code: resp
+          };
+          mClient.loginPhone(loginInfo)
+            .then((resp) => {
+              console.log('登录返回', resp);
+              if (resp.data.code == 200) {
+                wx.switchTab({
+                  url: '../user/index'
+                });
+              } else if (resp.data.message) {
+                wx.showToast({
+                  title: resp.data.message,
+                  icon: 'none',
+                  duration: 1000
+                });
+              }
+            })
+            .catch((rej) => {
+              console.log(rej)
+              wx.showToast({
+                title: '网络错误，请稍后重试',
+                icon: 'none',
+                duration: 1000
+              });
+            })
         })
-        .catch((rej) => {
+        .catch(rej => {
           console.log(rej)
-          wx.showToast({
-            title: '网络错误，请稍后重试',
-            icon: 'none',
-            duration: 1000
-          });
-        })
-
+        });
     }
   },
   /**

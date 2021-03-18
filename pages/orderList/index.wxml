@@ -9,7 +9,6 @@
   bindtoload="toload">
   <!-- 日期选择 -->
   <view class="{{count?'con':'iconNone'}}">
-    <view wx:if="{{priceSum>=0}}" class="priceNumber">当日销售总额：<text style="color:#179B17">{{priceSum}}</text>元</view>
     <view></view>
     <view class="orderDate" title="日期">
       <picker data-field="date" mode="date" value="{{date}}" bindchange="bindDateChange">
@@ -18,26 +17,16 @@
       <image src="../../assets/img/timg.png" alt="" mode="aspectFit" />
     </view>
   </view>
+  <!-- <dateModal bind:dateModalData="dateModalData" isshowDatemodal="{{isshowDate}}" bind:todayEven="todayEven" /> -->
 
-  <view class="orderListWrap">
+  <!-- <view class="orderListWrap">
     <block wx:for="{{orderList}}" wx:key="index">
       <view class="orderList" data-id="{{item.id}}" bindtap="clickOrder">
         <view class="order">
-          <!-- <view class="order_title">
-            <view class="order_status">
-              <view class="order_status_img">
-                <image
-                  src="{{openid == '0'?'../../resource/img/little-bag.png':openid == '1'?'../../resource/img/middle-bag.png':'../../resource/img/big-bag.png'}}">
-                </image>
-              </view>
-              <view class="order_status_text">{{item.orderStatus}}</view>
-            </view>
-            <view class="order_money" wx:if="{{item.orderStatus=='已完成'}}">￥{{item.orderPrice}}</view>
-          </view> -->
           <view class="order_content">
             <view class="order_detail">
               <view class="detail_name">订单编号：</view>
-              <view class="detail_content">{{item.orderNo}}</view>
+              <view class="detail_content">{{item.id}}</view>
             </view>
             <view class="order_detail">
               <view class="detail_name">交易时间：</view>
@@ -67,6 +56,44 @@
           </view>
         </view>
         <icon class="iconfont iconduigou1"></icon>
+      </view>
+    </block>
+  </view> -->
+  <!-- <image class="calendar" src="../../resource/img/calendar.png" bindtap="claendarHidden"></image> -->
+  <yycalendar title="选择日期" monthCount="1" startMonthCount="-1" pastDateChoice="true" show="{{isShow}}" bind:yybindchange="_yybindchange" bind:yybindhide="_yybindhide" />
+  <!-- <calendar /> -->
+  <tab bindonChange="change" currentIndex="{{type}}" scroll="false" options="{{options}}" lineSize="1" activeColor="#7470ff" transition="false" textStyles="font-size:32rpx;font-weight:bold;color:#999999;" />
+  <view class="orderListWrap">
+    <block wx:for="{{orderList}}" wx:key="index">
+      <view class="orderList" data-id="{{item.id}}" bindtap="gotoOrderDetailFn">
+        <view class="equipment">
+          <view class="equipment-item">
+            <image style="height:36rpx" src="../../resource/img/location.png"></image>
+            <view class="equipment-item-name">点位名称：{{item.pointName}}</view>
+          </view>
+          <view class="equipment-item">
+            <image src="../../resource/img/number.png"></image>
+            <view class="equipmentName">订单编号：{{item.id}}</view>
+          </view>
+          <view class="order-status">
+            <image
+              src="{{item.orderStatus==='已完成'?'../../resource/img/on_line.png':'../../resource/img/off_line.png'}}">
+            </image>
+            <view class="{{item.orderStatus==='已完成'?'':'off_line'}}">{{item.orderStatus}}</view>
+          </view>
+        </view>
+        <view class="shopWrap">
+          <view class="shop-img">
+            <block wx:for="{{item.detailsList}}" wx:for-item='detail' wx:key="index" wx:if="{{index < 3}}">
+              <image src="{{detail.url}}"></image>
+            </block>
+          </view>
+          <view class="omit" wx:if="{{item.detailsList.length>3}}">...</view>
+          <view class="goods-price">
+            <view class="price"> <text style="font-size:28rpx;">￥</text>{{item.orderPrice}}</view>
+            <view class="number">共{{item.counts}}种</view>
+          </view>
+        </view>
       </view>
     </block>
   </view>

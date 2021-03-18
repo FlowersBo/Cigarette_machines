@@ -1,0 +1,25 @@
+/* component/dateModal/index.wxss */
+.mask-date{position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;background: rgba(128, 127, 127, 0.9);z-index: 9;}
+.mask-date .modal-date{position: fixed;background: #fff;top: 10vh;left: 5vw;right: 5vw;z-index:10;border-radius: 1vw;padding-bottom: 3vw;}
+
+.mask-date .modal-date .title{font-size: 4vw;background: #fbbe0e;color: #fff;text-align: center;line-height: 12vw;position: relative
+;border-top-left-radius: 1vw;border-top-right-radius: 1vw; }
+.mask-date .modal-date .closedate{position: absolute;top: 3vw;right: 3vw;color: #7a7a7a;background: #fff;border-radius: 100%;width: 6vw;height: 6vw;text-align: center;line-height: 6vw;font-size: 3.6vw;}
+.mask-date .modal-date .masktime{display: table;width: 100%;}
+.mask-date .modal-date .timetitle{color: #686868;font-size: 3.6vw;line-height: 10vw;padding-left: 3vw;float: left;}
+.mask-date .modal-date .selectime{line-height:10vw;height:30vw;text-align: center;color: #fbbe0e;width:30vw;float: right;margin-right: 3vw;}
+
+
+.mask-date .modal-date .date{padding: 0 3vw;color: #686868;}
+.mask-date .modal-date .date .datecycle{margin: 0 auto; font-size: 3.6vw;text-align: center;height: 5vw;margin-bottom: 2vw;}
+.mask-date .modal-date .date .datecycle .lic{float: left;width: 12vw;line-height: 5vw;}
+.mask-date .modal-date .date .li-yearmon{display: table;width: 82vw; height: 10vw;line-height: 10vw; font-size: 3.6vw;margin-left: 2vw;padding-top: 1vw;color:#000000;}
+.mask-date .modal-date .date .dateday{ margin: 0 auto; font-size: 3.6vw;text-align: center;}
+.mask-date .modal-date .date .dateday .lid{float: left;width: 8vw;margin: 1vw 2vw 0 2vw;border-radius: 100%;height: 8vw;line-height: 8vw;}
+.mask-date .modal-date .date .dateday .lided{color: #fff;}
+.mask-date .modal-date .date .dateday .lid_s{background: #fbbe0e;color: #fff;}
+.mask-date .modal-date .ulbtn{background: #fff; display: flex;text-align: center;font-size: 4.2vw;position: absolute;bottom: 0;left: 0;width: 100%;height: 14vw;padding: 0 6vw;box-sizing: border-box;}
+.mask-date .modal-date .ulbtn::after{content: "";position: absolute; background:#d9d9d9; top:-0.7vw; left: 5vw;height:1vw;right: 5vw; z-index: 1;transform: scaleY(0.3);transform-origin:0 0;}
+.mask-date .modal-date .ulbtn .lil{flex: 1;border-right: 0.3vw #d9d9d9 solid;color: #00d4fa;height: 8vw;margin: 3vw 0;line-height: 8vw;}
+.mask-date .modal-date .ulbtn .lir{flex: 1;color: #fbbe0f;height: 8vw;margin: 3vw 0;line-height: 8vw;}
+

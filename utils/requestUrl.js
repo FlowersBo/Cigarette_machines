@@ -295,8 +295,8 @@ function loginPhone(loginInfo = {}) {
         'Content-Type': 'application/json',
       },
       success: function (resp) {
-        if (resp.data.code == 200) {
-          console.log(resp)
+        console.log(resp)
+        if (resp.data.code == 200 && resp.data.data) {
           wx.setStorageSync('accessToken', resp.data.data.access_token);
           wx.setStorageSync('refreshToken', resp.data.data.refresh_token);
           wx.setStorageSync('username', resp.data.data.username);

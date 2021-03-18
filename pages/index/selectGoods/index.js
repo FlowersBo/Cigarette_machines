@@ -101,7 +101,12 @@ Page({
   bindPointSerch: e => {
     let searchStr = e.detail.value;
     let pageIndex = '1';
-    that.goodsListFn(pageIndex, searchStr);
+    that.setData({
+      goodsList: []
+    })
+    if(that.data.goodsList.length<=0){
+      that.goodsListFn(pageIndex, searchStr);
+    }
   },
 
   selectGoods: e => {

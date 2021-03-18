@@ -27,23 +27,42 @@ Page({
     },
     date: '',
     priceSum: -1, //当日销售总额
+    isshowDate: false,
   },
+
+  //点击确认日期从组件上传来数据
+  dateModalData: function (e) {
+    wx.showToast({
+      icon: 'none',
+      title: e.detail.datetime + e.detail.times,
+    })
+  },
+  //即时入驻
+  todayEven: function (e) {
+    wx.showToast({
+      icon: 'none',
+      title: e.detail.today + e.detail.times,
+    })
+  },
+
+  claendarHidden: () => {
+    that.setData({
+      isShow: true
+    })
+  },
+
+
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     that = this;
-    let pageIndex = '1';
-    // let date = util.customFormatTime(new Date());
-    // that.setData({
-    //   date: date
-    // })
-    that.orderListFn(pageIndex);
   },
 
   // 订单列表
-  orderListFn: (pageIndex,searchDate) => {
+  orderListFn: (pageIndex, searchDate) => {
     that.setData({
       isFlag: false
     })
@@ -63,6 +82,15 @@ Page({
           // })
           if (orderList) {
             orderList.forEach(element => {
+              if (element.orderStatus === '2') {
+                element.orderStatus = '已完成'
+              } else if (element.orderStatus === '3') {
+                element.orderStatus = '出货失败'
+              } else if(element.orderStatus === '4'){
+                element.orderStatus = '已退款'
+              } else {
+                element.orderStatus = '已取消'
+              }
               element.createDate = util.timestampToTimeLong(element.createDate);
             });
           }
@@ -124,6 +152,18 @@ Page({
     that.orderListFn(pageIndex, date);
   },
 
+  gotoOrderDetailFn: (e) => {
+    let id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/orderList/orderDetail/index',
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', {
+          orderid: id
+        })
+      }
+    })
+  },
 
   refresh() {
     let pageIndex = '1';
@@ -202,13 +242,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    that.setData({
+      orderList: []
+    })
+    let pageIndex = '1';
+    // let date = util.customFormatTime(new Date());
+    // that.setData({
+    //   date: date
+    // })
+    that.orderListFn(pageIndex);
+  },
 
-  },
-  // 点击跳转订单详情
-  clickOrder: (e) => {
-    console.log(e);
-    const orderId = e.currentTarget.dataset.id;
-  },
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -1,7 +1,9 @@
 {
   "usingComponents": {
-  
-    },
+    "dateModal": "/component/dateModal/index",
+    "yycalendar": "plugin://myPlugin/yycalendar",
+    "calendar": "plugin://calendar/calendar"
+  },
   "enablePullDownRefresh": false,
   "backgroundTextStyle": "dark",
   "navigationStyle": "custom"

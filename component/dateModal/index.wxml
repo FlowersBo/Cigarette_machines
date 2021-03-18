@@ -1,0 +1,35 @@
+<!--component/dateModal/index.wxml-->
+<view class="mask-date" hidden="{{!isshowDatemodal}}" catchtouchmove="touchmove">
+<view  class="modal-date">
+<view class="title">入驻日期及时间<view catchtap="closeDateBtn" class="closedate">X</view> </view>
+<view class="masktime">
+<view class="timetitle">时间</view>
+   <picker-view  bindchange="selectTimeBtn" class="selectime" value="{{item}}" >
+    <picker-view-column  >
+      <view style="line-height:34px;" wx:for="{{timearr}}" wx:key="index" >{{item}}</view>
+    </picker-view-column>
+    </picker-view >
+</view>
+<view class="date">
+  <view class="datecycle">
+    <view class="lic" wx:for="{{dateCycle}}" wx:key="index">{{item}}</view>
+   
+  </view>
+ <scroll-view scroll-y="true" style="height:60vw;padding-bottom:14vw;">
+  <block wx:for="{{DateData.ymarr}}" wx:key="index" wx:for-item="ymarr" wx:for-index="index1" >
+    <view  class="li-yearmon">{{ymarr.ym}}</view>
+    <view class="dateday">
+      <view wx:if="{{index1==1||DateData.today<=(7-ymarr.firstDay)}}" wx:for="{{DateData.ymarr[index1].firstDay}}" wx:key="index" class="lid">{{ymarr[index1].firstDay}}</view>
+      <view  wx:for="{{ymarr.dateArr}}" wx:key="index"  catchtap="selectDateBtn" data-index="{{item}}" data-year="{{ymarr.year}}" data-month="{{ymarr.month}}" wx:key="index" class="lid {{item<DateData.today&&index1==0?'lided':''}} {{item==DateData.selectday&&ymarr.month==DateData.selectmonth?'lid_s':''}}">{{item}}</view>
+    </view> 
+  </block>
+ </scroll-view>
+  
+</view>
+<view class="ulbtn">
+  <view class="lil" catchtap="nowDateBtn" >即时入住</view>
+  <view class="lir" catchtap="ortherDateBtn" >确认日期</view>
+</view>
+</view></view>
+
+

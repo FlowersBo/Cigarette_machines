@@ -40,7 +40,7 @@
   position: absolute;
   right: 60rpx;
   font-size: 40rpx;
-  top: -4rpx;
+  top: 6rpx;
   color: #F7C67E;
 }
 

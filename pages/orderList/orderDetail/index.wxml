@@ -1,0 +1,112 @@
+<!--pages/orderList/orderDetail/index.wxml-->
+<cu-custom bgColor="bg-user-color" isBack class="custom">
+  <view slot="content">订单详情</view>
+</cu-custom>
+<view class="orderDetailWrap">
+  <view class="orderDetail">
+    <view class="equipmentWrap">
+      <image src="../../../resource/img/background_home.png"></image>
+      <view class="equipment">
+        <view class="equipment-item">
+          <image class="equipment-item-img" src="../../../resource/img/location.png"></image>
+          <view class="equipment-item-name">门店：{{orderDetail.pointName}}</view>
+        </view>
+        <view class="equipment-item">
+          <image src="../../../resource/img/device.png"></image>
+          <view class="equipmentName">设备：{{orderDetail.merchantNO}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="goodsDetail">
+      <view class="goods-title">
+        <image class="goods-title-img" src="../../../resource/img/goods.png"></image>
+        <view class="goods-title-text">商品明细：</view>
+      </view>
+      <view class="particulars">
+        <view class="particulars-item" wx:for="{{orderDetail.tbOrderDetailsList}}" wx:key="index">
+          <view class="goods-item">
+            <image class="goods-img" src="{{item.url}}"></image>
+            <view class="goodss">
+              <image class="label" src="../../../resource/img/label.png"></image>
+              <view class="goodsName">{{item.productName}}</view>
+            </view>
+          </view>
+          <view class="goods-item">x{{item.quantity}}</view>
+          <view class="goods-item">￥{{item.price}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="orderWrap">
+      <view class="order">
+        <view class="order-item">
+          <image class="order-item-img" src="../../../resource/img/money.png"></image>
+          <view class="order-item-name">订单金额：￥{{tbOrderInfo.orderPrice}}</view>
+        </view>
+        <view class="order-item">
+          <image src="../../../resource/img/payment.png"></image>
+          <view class="orderName">支付方式：{{tbOrderInfo.payPlatform}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="orderWrap">
+      <view class="order">
+        <view class="order-item">
+          <image class="order-item-img" src="../../../resource/img/number.png"></image>
+          <view class="order-item-name">订单编号：{{tbOrderInfo.id}}</view>
+        </view>
+        <view class="order-item">
+          <image src="../../../resource/img/time.png"></image>
+          <view class="orderName">下单时间：{{tbOrderInfo.payDate?tbOrderInfo.payDate:''}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="orderBtn" wx:if="{{tbOrderInfo.orderStatus!='4'}}" bindtap="refundFn">退款</view>
+
+    <view class="drawer_screen" bindtap="gotobargainDetailFuns" data-status="1" wx:if="{{showModalStatus}}"></view>
+    <!--content-->
+    <!--使用animation属性指定需要执行的动画-->
+    <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+      <scroll-view scroll-y class="drawer_box_content">
+        <view class="list" wx:for="{{GoodsCartList}}" wx:key="index">
+          <!-- radio选择IOCN -->
+          <view class="goods">
+            <image wx:if="{{item.selected}}" data-id="{{item.id}}" data-selected="{{item.selected}}" class="radio_chek"
+              bindtap="selectList" src='../../../resource/img/radio_show.png'></image>
+            <!-- else -->
+            <image wx:else src='../../../resource/img/radio_none.png' class="radio_chek"
+              data-selected="{{item.selected}}" data-id="{{item.id}}" bindtap="selectList"></image>
+          </view>
+
+          <view class="goods">
+            <view class="goods-item">
+              <image class="list_img" mode="aspectFit" src="{{item.url}}"></image>
+              <view class="goodsDetail_min">
+                <view class="list_name">{{item.productName}}</view>
+                <view class="list_price">￥{{item.price}}</view>
+              </view>
+            </view>
+          </view>
+
+          <view class="goods">
+            <view class="carts-num">
+              <!--减按钮  -->
+              <lable class="minus {{item.isSub}}" bindtap="btn_minus" data-quan="{{item.quan}}" data-id="{{item.id}}">-
+              </lable>
+              <!-- 文本框值 -->
+              <label class="view_text_center">{{item.quan}}</label>
+              <!-- 加按钮-->
+              <lable class="plus {{item.isAdd}}" bindtap="btn_add" data-quan="{{item.quan}}" data-id="{{item.id}}">+
+              </lable>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="totalPrice">退款金额：{{allPrice}}元</view>
+      <view class="btnWrap">
+        <button class="drawer_box_btn" data-status="0" catchtap="gotobargainDetailFuns">确认</button>
+        <button class="drawer_box_btn cancel_btn" data-status="1" catchtap="gotobargainDetailFuns">取消</button>
+      </view>
+    </view>
+
+  </view>
+</view>

@@ -124,7 +124,7 @@
   font-weight: bold;
   letter-spacing: 20rpx;
   display: block;
-  margin-top: 200rpx;
+  margin-top: 300rpx;
   border-radius: 50rpx;
 }
 

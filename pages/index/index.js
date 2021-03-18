@@ -153,17 +153,17 @@ Page({
           //   }
           // }
           // goodsRoadList.sort(compare('showNo'));
-          if (goodsRoadList.length >= 60) {
-            const pullText = '- 上拉加载更多 -'
-            that.setData({
-              'push.pullText': pullText,
-            })
-          } else {
-            const pullText = ''
-            that.setData({
-              'push.pullText': pullText,
-            })
-          }
+          // if (goodsRoadList.length >= 60) {
+          //   const pullText = '- 上拉加载更多 -'
+          //   that.setData({
+          //     'push.pullText': pullText,
+          //   })
+          // } else {
+          //   const pullText = ''
+          //   that.setData({
+          //     'push.pullText': pullText,
+          //   })
+          // }
           if (goodsRoadList.length <= 0) {
             that.setData({
               isFlag: true
@@ -388,7 +388,7 @@ Page({
   },
 
   scrollTopFn(e) {
-    console.log(e.detail.scrollTop);
+    // console.log(e.detail.scrollTop);
     if (e.detail.scrollTop > 0) {
       that.setData({
         scrollTopNum: e.detail.scrollTop
@@ -420,36 +420,36 @@ Page({
     }
   },
 
-  toload() {
-    let count = that.data.count;
-    let pageIndex = that.data.pageIndex;
-    console.log('加载', that.data.goodsRoadList.length);
-    if (that.data.goodsRoadList.length < count) {
-      that.setData({
-        'push.isLoading': true,
-        'push.pullText': '正在加载',
-        'push.loading': '../../resource/img/pull_refresh.gif',
-      })
-      pageIndex++;
-      console.log(pageIndex)
-      count = String(pageIndex);
-      console.log(pageIndex)
-      that.goodsRoadFn(pageIndex, that.data.deviceId);
-      setTimeout(() => {
-        that.setData({
-          pageIndex: pageIndex,
-          'push.isLoading': false,
-          'push.pullText': '- 上拉加载更多 -',
-          'push.loading': '../../resource/img/finish.png',
-        })
-      }, 1500)
-    } else if (that.data.goodsRoadList.length > 0 && (pageIndex * that.data.pageSize) >= that.data.count) {
-      that.setData({
-        'push.isLoading': false,
-        'push.pullText': '- 我也是有底线的 -'
-      })
-    }
-  },
+  // toload() {
+  //   let count = that.data.count;
+  //   let pageIndex = that.data.pageIndex;
+  //   console.log('加载', that.data.goodsRoadList.length);
+  //   if (that.data.goodsRoadList.length < count) {
+  //     that.setData({
+  //       'push.isLoading': true,
+  //       'push.pullText': '正在加载',
+  //       'push.loading': '../../resource/img/pull_refresh.gif',
+  //     })
+  //     pageIndex++;
+  //     console.log(pageIndex)
+  //     count = String(pageIndex);
+  //     console.log(pageIndex)
+  //     that.goodsRoadFn(pageIndex, that.data.deviceId);
+  //     setTimeout(() => {
+  //       that.setData({
+  //         pageIndex: pageIndex,
+  //         'push.isLoading': false,
+  //         'push.pullText': '- 上拉加载更多 -',
+  //         'push.loading': '../../resource/img/finish.png',
+  //       })
+  //     }, 1500)
+  //   } else if (that.data.goodsRoadList.length > 0 && (pageIndex * that.data.pageSize) >= that.data.count) {
+  //     that.setData({
+  //       'push.isLoading': false,
+  //       'push.pullText': '- 我也是有底线的 -'
+  //     })
+  //   }
+  // },
 
 
   onShow: function () {
