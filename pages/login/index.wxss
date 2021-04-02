@@ -87,7 +87,8 @@ page {
 }
 
 .repeatGetNum {
-  background-color: #ccc;
+  background-color: #f3c8889a;
+   box-shadow: 0 0 10px #f3c8889a;
   color: fff;
 }
 
