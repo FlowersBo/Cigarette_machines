@@ -37,7 +37,8 @@ Page({
     const data = {
       pageSize: that.data.pageSize,
       pageIndex,
-      searchStr
+      searchStr,
+      merchantId: wx.getStorageSync('MerchantID')
     }
     mClient.wxGetRequest(api.GoodsRoadProductList, data)
       .then(res => {
@@ -49,7 +50,7 @@ Page({
           console.log(Boolean(pageIndex * that.data.pageSize >= count));
           if (pageIndex * that.data.pageSize >= count) {
             let selectDetail = {
-              productno: 0,
+              barcode: 0,
               productname: '请选择商品',
               price: 0,
               id: 0

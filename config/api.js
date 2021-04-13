@@ -1,6 +1,6 @@
 // const ApiRootUrl = 'https://w3.morninggo.cn/'; //测试
 const ApiRootUrl = 'https://api.morninggo.cn/';
-// const ApiRootUrl = 'http://192.168.126.248:8080/morninggo_app_http_war/';
+// const ApiRootUrl = 'http://192.168.126.229:8080/morninggo_app_http_war/';
 // const ApiRootUrl = 'http://192.168.126.248:8080/app-http/';
 module.exports = {
     RefreshAuth: ApiRootUrl + 'tobaccos/user/refresh_auth', //刷新授权

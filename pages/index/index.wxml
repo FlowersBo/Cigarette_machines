@@ -25,7 +25,7 @@
               <view class="on_lineStateWrap">
                 <image class="icon_img" style="width:30rpx; height:30rpx; margin-top:6rpx;" mode="scaleToFill"
                   src="/resource/img/operator.png"></image>
-                <view class="serialNumber">运营商编号：{{item.deviceId}}</view>
+                <view class="serialNumber">运营商编号：{{item.merchantNO}}</view>
               </view>
               <view class="on_lineStateWrap">
                 <image class="icon_img" style="width:30rpx; height:34rpx; margin-top:6rpx;" mode="scaleToFill"
