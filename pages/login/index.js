@@ -20,6 +20,14 @@ Page({
    */
   onLoad: function (options) {
     that = this;
+    that.setData({
+      phoneNumber: wx.getStorageSync('username')
+    })
+    if (wx.getStorageSync('username')) {
+      that.setData({
+        delete: ''
+      })
+    }
     mClient.refreshToken()
       .then(resp => {
         console.log('授权验证', resp);

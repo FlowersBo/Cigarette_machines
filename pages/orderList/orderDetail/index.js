@@ -17,6 +17,7 @@ Page({
    */
   onLoad: function (options) {
     that = this;
+    this.mask = this.selectComponent('#mask');
     // console.log(options)
     // let orderid = options.orderid;
     // console.log('订单号:' + orderid);
@@ -34,6 +35,55 @@ Page({
       })
       that.orderDetailFn(data.orderid);
     })
+  },
+
+  // 手动出货
+  manualOperation: function () {
+    this.mask.util('open');
+  },
+  // mask模态框
+  statusNumberFn: (e) => {
+    if (e.detail.status === '0') {
+      try {
+        let data = {
+          orderid: that.data.orderid
+        };
+        mClient.wxRequest(api.ManualShipment, data)
+          .then(res => {
+            console.log('手动出货', res);
+            if (res.code == 200) {
+              wx.showToast({
+                title: res.message,
+                icon: 'none',
+                duration: 2000
+              })
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1500)
+
+            } else {
+              wx.showToast({
+                title: res.message,
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          })
+          .catch(rej => {
+            console.log('无法请求', rej);
+            wx.showToast({
+              title: '服务器忙，请稍后重试',
+              icon: 'none',
+              duration: 2000
+            })
+          })
+
+      } catch (e) {
+        // Do something when catch error
+      }
+    }
   },
 
   orderDetailFn: orderid => {

@@ -13,7 +13,7 @@ Page({
   data: {
     orderList: [],
     pageIndex: '1',
-    pageSize: '10',
+    pageSize: '20',
     isFlag: false,
     pull: {
       isLoading: false,
@@ -28,28 +28,62 @@ Page({
     date: '',
     priceSum: -1, //当日销售总额
     isshowDate: false,
+    array: [{
+      orderStatus: 2,
+      text: '已完成'
+    }, {
+      orderStatus: 3,
+      text: '出货失败'
+    }, {
+      orderStatus: 4,
+      text: '已退款'
+    }],
+    selectarray: '请选择状态'
+  },
+
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value);
+    let index = e.detail.value;
+    let array = that.data.array;
+    let orderStatus = '';
+    if (index === 0) {
+      orderStatus = '2'
+    } else if (index === 1) {
+      orderStatus = '3'
+    } else if (index === 2) {
+      orderStatus = '4'
+    }
+    that.setData({
+      index: e.detail.value,
+      pageIndex: '1',
+      orderList: [],
+      selectarray: array[e.detail.value].text,
+      orderStatus: orderStatus
+    })
+    let pageIndex = '1';
+    that.orderListFn(pageIndex, that.data.date, orderStatus);
   },
 
   //点击确认日期从组件上传来数据
-  dateModalData: function (e) {
-    wx.showToast({
-      icon: 'none',
-      title: e.detail.datetime + e.detail.times,
-    })
-  },
-  //即时入驻
-  todayEven: function (e) {
-    wx.showToast({
-      icon: 'none',
-      title: e.detail.today + e.detail.times,
-    })
-  },
+  // dateModalData: function (e) {
+  //   wx.showToast({
+  //     icon: 'none',
+  //     title: e.detail.datetime + e.detail.times,
+  //   })
+  // },
+  // //即时入驻
+  // todayEven: function (e) {
+  //   wx.showToast({
+  //     icon: 'none',
+  //     title: e.detail.today + e.detail.times,
+  //   })
+  // },
 
-  claendarHidden: () => {
-    that.setData({
-      isShow: true
-    })
-  },
+  // claendarHidden: () => {
+  //   that.setData({
+  //     isShow: true
+  //   })
+  // },
 
 
 
@@ -62,7 +96,7 @@ Page({
   },
 
   // 订单列表
-  orderListFn: (pageIndex, searchDate) => {
+  orderListFn: (pageIndex, searchDate, orderStatus) => {
     that.setData({
       isFlag: false
     })
@@ -86,7 +120,7 @@ Page({
                 element.orderStatus = '已完成'
               } else if (element.orderStatus === '3') {
                 element.orderStatus = '出货失败'
-              } else if(element.orderStatus === '4'){
+              } else if (element.orderStatus === '4') {
                 element.orderStatus = '已退款'
               } else {
                 element.orderStatus = '已取消'
@@ -149,7 +183,7 @@ Page({
       pageIndex: '1',
       orderList: []
     })
-    that.orderListFn(pageIndex, date);
+    that.orderListFn(pageIndex, date, that.data.orderStatus);
   },
 
   gotoOrderDetailFn: (e) => {
@@ -172,7 +206,8 @@ Page({
       pageIndex: '1',
       orderList: [],
       date: '',
-      priceSum: -1
+      priceSum: -1,
+      selectarray: '请选择状态'
     })
     if (that.data.orderList.length <= 0) {
       that.setData({
@@ -243,7 +278,9 @@ Page({
    */
   onShow: function () {
     that.setData({
-      orderList: []
+      orderList: [],
+      date: '',
+      selectarray: '请选择状态'
     })
     let pageIndex = '1';
     // let date = util.customFormatTime(new Date());

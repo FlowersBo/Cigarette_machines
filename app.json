@@ -31,7 +31,8 @@
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
     "scroll-y": "/component/scroll-y/index",
-    "noData": "/component/noData/noData"
+    "noData": "/component/noData/noData",
+    "mask": "/component/mask/index"
   },
   "permission": {
     "scope.userLocation": {

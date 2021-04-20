@@ -7,9 +7,17 @@
 <scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
   style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
   bindtoload="toload">
-  <!-- 日期选择 -->
   <view class="{{count?'con':'iconNone'}}">
-    <view></view>
+    <view class="orderDate">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="{{'text'}}">
+        <view class="picker">
+          <!-- {{index?array[index].text:'请选择状态'}} -->
+          <input class="weui-input" disabled='true' value="{{selectarray}}"></input> 
+        </view>
+      </picker>
+      <image src="../../assets/img/timg.png" alt="" mode="aspectFit" />
+    </view>
+
     <view class="orderDate" title="日期">
       <picker data-field="date" mode="date" value="{{date}}" bindchange="bindDateChange">
         <input class="weui-input" placeholder="请选择日期" disabled='true' value="{{date}}"></input>
@@ -60,9 +68,9 @@
     </block>
   </view> -->
   <!-- <image class="calendar" src="../../resource/img/calendar.png" bindtap="claendarHidden"></image> -->
-  <yycalendar title="选择日期" monthCount="1" startMonthCount="-1" pastDateChoice="true" show="{{isShow}}" bind:yybindchange="_yybindchange" bind:yybindhide="_yybindhide" />
+  <!-- <yycalendar title="选择日期" monthCount="1" startMonthCount="-1" pastDateChoice="true" show="{{isShow}}" bind:yybindchange="_yybindchange" bind:yybindhide="_yybindhide" /> -->
   <!-- <calendar /> -->
-  <tab bindonChange="change" currentIndex="{{type}}" scroll="false" options="{{options}}" lineSize="1" activeColor="#7470ff" transition="false" textStyles="font-size:32rpx;font-weight:bold;color:#999999;" />
+  <!-- <tab bindonChange="change" currentIndex="{{type}}" scroll="false" options="{{options}}" lineSize="1" activeColor="#7470ff" transition="false" textStyles="font-size:32rpx;font-weight:bold;color:#999999;" /> -->
   <view class="orderListWrap">
     <block wx:for="{{orderList}}" wx:key="index">
       <view class="orderList" data-id="{{item.id}}" bindtap="gotoOrderDetailFn">

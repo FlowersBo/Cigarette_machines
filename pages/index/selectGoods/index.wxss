@@ -40,7 +40,7 @@
   position: absolute;
   right: 60rpx;
   font-size: 40rpx;
-  top: 6rpx;
+  top: 2rpx;
   color: #F7C67E;
 }
 
@@ -88,7 +88,12 @@
   word-break: break-all;
 }
 
-.nav-item:nth-child(2),
+.nav-item:last-child,
+.goods-item:last-child{
+  flex: 0.5;
+}
+
+/* .nav-item:nth-child(2),
 .goods-item:nth-child(2) {
   flex: 1.8;
-}
+} */
