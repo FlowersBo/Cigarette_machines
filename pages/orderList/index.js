@@ -38,7 +38,8 @@ Page({
       orderStatus: 4,
       text: '已退款'
     }],
-    selectarray: '请选择状态'
+    selectarray: '请选择状态',
+    orderStatus: ''
   },
 
   bindPickerChange: function (e) {
@@ -46,13 +47,14 @@ Page({
     let index = e.detail.value;
     let array = that.data.array;
     let orderStatus = '';
-    if (index === 0) {
+    if (index == 0) {
       orderStatus = '2'
-    } else if (index === 1) {
+    } else if (index == 1) {
       orderStatus = '3'
-    } else if (index === 2) {
+    } else if (index == 2) {
       orderStatus = '4'
     }
+    console.log('订单状态', orderStatus);
     that.setData({
       index: e.detail.value,
       pageIndex: '1',
@@ -93,6 +95,13 @@ Page({
    */
   onLoad: function (options) {
     that = this;
+    that.setData({
+      orderList: [],
+      date: '',
+      selectarray: '请选择状态'
+    })
+    let pageIndex = '1';
+    that.orderListFn(pageIndex);
   },
 
   // 订单列表
@@ -104,7 +113,8 @@ Page({
       pageSize: that.data.pageSize,
       pageIndex,
       pointId: wx.getStorageSync('pointId'),
-      searchDate
+      searchDate,
+      orderStatus
     }
     mClient.wxGetRequest(api.OrderList, data)
       .then(res => {
@@ -190,8 +200,20 @@ Page({
     let id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: '/pages/orderList/orderDetail/index',
+      events: {
+        someEvent: function (data) {
+          console.log(data)
+          if (data) {
+            let pageIndex = '1';
+            that.setData({
+              pageIndex: '1',
+              orderList: []
+            })
+            that.orderListFn(pageIndex, that.data.date, that.data.orderStatus);
+          }
+        }
+      },
       success: function (res) {
-        // 通过eventChannel向被打开页面传送数据
         res.eventChannel.emit('acceptDataFromOpenerPage', {
           orderid: id
         })
@@ -207,7 +229,8 @@ Page({
       orderList: [],
       date: '',
       priceSum: -1,
-      selectarray: '请选择状态'
+      selectarray: '请选择状态',
+      orderStatus: ''
     })
     if (that.data.orderList.length <= 0) {
       that.setData({
@@ -231,8 +254,6 @@ Page({
   toload() {
     let pageIndex = that.data.pageIndex;
     let count = that.data.count;
-    let date = that.data.date;
-    console.log('加载时时间', date);
     if (that.data.orderList.length < count) {
       that.setData({
         'push.isLoading': true,
@@ -243,7 +264,7 @@ Page({
       console.log(pageIndex)
       pageIndex = String(pageIndex);
       console.log(pageIndex)
-      that.orderListFn(pageIndex, date);
+      that.orderListFn(pageIndex, that.data.date, that.data.orderStatus);
       setTimeout(() => {
         that.setData({
           pageIndex: pageIndex,
@@ -277,17 +298,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    that.setData({
-      orderList: [],
-      date: '',
-      selectarray: '请选择状态'
-    })
-    let pageIndex = '1';
+    // that.setData({
+    //   orderList: [],
+    //   date: '',
+    //   selectarray: '请选择状态'
+    // })
+    // let pageIndex = '1';
+    // that.orderListFn(pageIndex);
+
     // let date = util.customFormatTime(new Date());
     // that.setData({
     //   date: date
     // })
-    that.orderListFn(pageIndex);
   },
 
 

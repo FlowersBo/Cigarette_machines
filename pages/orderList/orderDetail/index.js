@@ -52,17 +52,25 @@ Page({
           .then(res => {
             console.log('手动出货', res);
             if (res.code == 200) {
-              wx.showToast({
-                title: res.message,
-                icon: 'none',
-                duration: 2000
+              wx.showModal({
+                title: '提示',
+                showCancel: false,
+                confirmText: "返回列表",
+                content: res.message,
+                success(res) {
+                  if (res.confirm) {
+                    const eventChannel = that.getOpenerEventChannel();
+                    eventChannel.emit('someEvent', {
+                      data: 'test'
+                    });
+                    wx.navigateBack({
+                      delta: 1
+                    })
+                  } else if (res.cancel) {
+                    console.log('用户点击取消')
+                  }
+                }
               })
-              setTimeout(function () {
-                wx.navigateBack({
-                  delta: 1
-                })
-              }, 1500)
-
             } else {
               wx.showToast({
                 title: res.message,
@@ -334,17 +342,25 @@ Page({
           .then(res => {
             console.log('退款', res);
             if (res.code == 200) {
-              wx.showToast({
-                title: res.message,
-                icon: 'none',
-                duration: 2000
+              wx.showModal({
+                title: '提示',
+                showCancel: false,
+                confirmText: "返回列表",
+                content: res.message,
+                success(res) {
+                  if (res.confirm) {
+                    const eventChannel = that.getOpenerEventChannel();
+                    eventChannel.emit('someEvent', {
+                      data: 'test'
+                    });
+                    wx.navigateBack({
+                      delta: 1
+                    })
+                  } else if (res.cancel) {
+                    console.log('用户点击取消')
+                  }
+                }
               })
-              setTimeout(function () {
-                wx.navigateBack({
-                  delta: 1
-                })
-              }, 1500)
-
             } else {
               wx.showToast({
                 title: res.message,
