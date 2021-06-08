@@ -84,7 +84,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.10.4",
+  "libVersion": "2.8.3",
   "appid": "wxb3bc72a6b9dd611c",
   "projectname": "Cigarette_machines",
   "debugOptions": {

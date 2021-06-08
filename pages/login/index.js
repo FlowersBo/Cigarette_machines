@@ -204,6 +204,7 @@ Page({
             .then((resp) => {
               console.log('登录返回', resp);
               if (resp.data.code == 200) {
+                wx.setStorageSync('clerkId', resp.data.data.clerkId);
                 wx.switchTab({
                   url: '../user/index'
                 });

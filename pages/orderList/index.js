@@ -15,6 +15,7 @@ Page({
     pageIndex: '1',
     pageSize: '20',
     isFlag: false,
+    loading: true,
     pull: {
       isLoading: false,
       loading: '../../resource/img/pull_refresh.gif',
@@ -155,6 +156,7 @@ Page({
             orderList: orderList,
             pageIndex: pageIndex,
             count: res.data.data.count,
+            loading: false
           })
         } else {
           wx.showToast({
@@ -175,7 +177,8 @@ Page({
           duration: 2000
         })
         that.setData({
-          isFlag: true
+          isFlag: true,
+          loading: false
         })
       })
   },

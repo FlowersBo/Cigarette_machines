@@ -1,4 +1,5 @@
 /* pages/orderList/index.wxss */
+@import "./index.skeleton.wxss";
 /* 日期 */
 .calendar {
   width: 100rpx;

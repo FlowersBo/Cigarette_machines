@@ -1,0 +1,147 @@
+<!--
+此文件为开发者工具生成，生成时间: 2021/5/25 上午10:41:15
+使用方法：
+在 C:\Users\13717\Desktop\Cigarette_machines\pages\orderList\index.wxml 引入模板
+
+```
+<import src="index.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 C:\Users\13717\Desktop\Cigarette_machines\pages\orderList\index.wxss 中引入样式
+```
+@import "./index.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view is="colorui/components/cu-custom" class="custom">
+      <view class="cu-custom custom--cu-custom" style="height:88px">
+        <view class="cu-bar custom--cu-bar fixed custom--fixed bg-user-color custom--bg-user-color" style="height:88px;padding-top:44px;">
+          <view class="content custom--content" style="top:42px;font-weight: bold; font-size:17px">
+            <view class="sk-transparent sk-text-21-6667-337 sk-text" style="background-position-x: 50%;">订单</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view is="component/scroll-y/index" class="scroll-view" style="position: absolute;top: 88px;bottom: 0;width: 100%;flex: 1;">
+      <scroll-view class="y-index--message y-index--scroll-view y-index--client-pool-list" lower-threshold="1" scroll-top="0" scroll-y="true">
+        <view class="y-index--pull-refresh y-index--jin">
+          <image class="y-index--icon-refresh y-index--z-index-1 sk-image"></image>
+          <view class="y-index--fs24 y-index--pt20 y-index--f-color-666 y-index--z-index-1 sk-transparent sk-text-14-2857-966 sk-text">正在刷新</view>
+        </view>
+        <view class="con">
+          <view class="orderDate" style="border: none;">
+            <view range="[{&quot;orderStatus&quot;:2,&quot;text&quot;:&quot;已完成&quot;},{&quot;orderStatus&quot;:3,&quot;text&quot;:&quot;出货失败&quot;},{&quot;orderStatus&quot;:4,&quot;text&quot;:&quot;已退款&quot;}]" range-key="text" value="null" class="sk-image">
+              <view class="picker">
+                <view class="weui-input sk-image" disabled="true" value="请选择状态"></view>
+              </view>
+            </view>
+            <image mode="aspectFit" class="sk-image"></image>
+          </view>
+          <view class="orderDate" style="border: none;">
+            <view data-field="date" mode="date" value="true" class="sk-image">
+              <view class="weui-input sk-image" disabled="true" placeholder="请选择日期" value="true"></view>
+            </view>
+            <image mode="aspectFit" class="sk-image"></image>
+          </view>
+        </view>
+        <view class="orderListWrap">
+          <view class="orderList" data-id="1392761677161693184">
+            <view class="equipment">
+              <view class="equipment-item">
+                <image style="height:18px" class="sk-image"></image>
+                <view class="equipment-item-name sk-transparent sk-text-14-2857-169 sk-text">点位名称：东街001店</view>
+              </view>
+              <view class="equipment-item">
+                <image class="sk-image"></image>
+                <view class="equipment-item-name sk-transparent sk-text-14-2857-961 sk-text">下单时间：2021-05-13 16:40:35</view>
+              </view>
+              <view class="order-status">
+                <image class="sk-image"></image>
+                <view class="sk-transparent sk-text-14-2857-988 sk-text">已完成</view>
+              </view>
+            </view>
+            <view class="shopWrap">
+              <view class="shop-img">
+                <image lazy-load="true" class="sk-image"></image>
+                <image lazy-load="true" class="sk-image"></image>
+                <image lazy-load="true" class="sk-image"></image>
+              </view>
+              <view class="goods-price">
+                <view class="price sk-transparent">
+                  <text style="font-size:14px;" class="sk-transparent sk-opacity">￥</text>21</view>
+                <view class="number sk-transparent sk-text-14-2857-944 sk-text">共5种</view>
+              </view>
+            </view>
+          </view>
+          <view class="orderList" data-id="1392755239328677888">
+            <view class="equipment">
+              <view class="equipment-item">
+                <image style="height:18px" class="sk-image"></image>
+                <view class="equipment-item-name sk-transparent sk-text-14-2857-306 sk-text">点位名称：东街001店</view>
+              </view>
+              <view class="equipment-item">
+                <image class="sk-image"></image>
+                <view class="equipment-item-name sk-transparent sk-text-14-2857-71 sk-text">下单时间：2021-05-13 16:15:00</view>
+              </view>
+              <view class="order-status">
+                <image class="sk-image"></image>
+                <view class="off_line sk-transparent sk-text-14-2857-476 sk-text">出货失败</view>
+              </view>
+            </view>
+            <view class="shopWrap">
+              <view class="shop-img">
+                <image lazy-load="true" class="sk-image"></image>
+              </view>
+              <view class="goods-price">
+                <view class="price sk-transparent">
+                  <text style="font-size:14px;" class="sk-transparent sk-opacity">￥</text>0.01</view>
+                <view class="number sk-transparent sk-text-14-2857-971 sk-text">共1种</view>
+              </view>
+            </view>
+          </view>
+          <view class="orderList" data-id="1392755053936246784">
+            <view class="equipment">
+              <view class="equipment-item">
+                <image style="height:18px" class="sk-image"></image>
+                <view class="equipment-item-name sk-transparent sk-text-14-2857-426 sk-text">点位名称：东街001店</view>
+              </view>
+              <view class="equipment-item">
+                <image class="sk-image"></image>
+                <view class="equipment-item-name sk-transparent sk-text-14-2857-936 sk-text">下单时间：2021-05-13 16:14:16</view>
+              </view>
+              <view class="order-status">
+                <image class="sk-image"></image>
+                <view class="sk-transparent sk-text-14-2857-751 sk-text">已完成</view>
+              </view>
+            </view>
+            <view class="shopWrap">
+              <view class="shop-img">
+                <image lazy-load="true" class="sk-image"></image>
+              </view>
+              <view class="goods-price">
+                <view class="price sk-transparent">
+                  <text style="font-size:14px;" class="sk-transparent sk-opacity">￥</text>0.03</view>
+                <view class="number sk-transparent sk-text-14-2857-231 sk-text">共1种</view>
+              </view>
+            </view>
+          </view>
+          <view class="orderList" data-id="1392746943460933632">
+            <view class="equipment">
+              <view class="order-status">
+                <image class="sk-image"></image>
+                <view class="sk-transparent sk-text-14-2857-261 sk-text">已完成</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="sk-loading-spinner">
+      <view class="circular"></view>
+    </view>
+  </view>
+</template>

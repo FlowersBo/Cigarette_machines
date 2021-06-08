@@ -105,8 +105,8 @@ Page({
           let orderDetail = res.data.data;
           let GoodsCartList = res.data.data.tbOrderDetailsList;
           let tbOrderInfo = res.data.data.tbOrderInfo;
-          if (tbOrderInfo.payDate) {
-            tbOrderInfo.payDate = util.timestampToTimeLong(tbOrderInfo.payDate);
+          if (tbOrderInfo.createDate) {
+            tbOrderInfo.createDate = util.timestampToTimeLong(tbOrderInfo.createDate);
           };
           let orderIdList = [];
           let orderIdListWrap = [];

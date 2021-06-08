@@ -1,12 +1,27 @@
 <!--pages/cs/index.wxml-->
-<cu-custom bgColor="bg-user-color">
-  <view slot="content">测试</view>
+<cu-custom bgColor="bg-user-color" class="custom">
+  <view slot="content">分享海报</view>
 </cu-custom>
-<view class="container">
-  <camera class="camera" device-position='front' flash='off' binderror='error' frame-size='small'>
-  </camera>
-  <view class="fc"></view>
-  <button class="btn" type="primary" bindtap="addCameraListener">{{ status === 0 ? '开启检测' : '停止检测' }}</button>
-  <text class="result">{{result}}</text>
-  <image mode="aspectFill" class="result-img" src="{{ faceImg }}"></image>
+<view hidden="{{!maskHidden}}">
+  <image src="../../resource/img/lisa.png" mode="widthFix" class='bgImg'></image>
+  <view class="shareText">
+    <text class='text'>从前从前有个人爱你很久，但偏偏风渐渐把距离吹的好远。</text>
+    <text class='text text2'> ———— 周杰伦《晴天》</text>
+  </view>
+
+  <view class='imgBox'>
+    <button open-type="share" class='zfbtn'>
+      <image src="{{wechat}}" class='img'></image>
+      <text class='btntxt'>分享给朋友</text>
+    </button>
+    <button class='zfbtn m_l' bindtap='formSubmit'>
+      <image src="{{xiazai}}" class='img'></image>
+      <text class='btntxt'>生成海报</text>
+    </button>
+  </view>
+</view>
+<view hidden="{{maskHidden}}">
+  <view class='imagePathBox' hidden="{{maskHidden}}"></view>
+  <canvas type="2d" id="canvas_box" style="width:260px;height:430px "></canvas>
+  <button class='baocun' catchtap="bc" canvas-id="mycanvas">保存到相册</button>
 </view>

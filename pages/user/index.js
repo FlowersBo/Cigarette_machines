@@ -59,6 +59,7 @@ Page({
 
   userInfoFn: () => {
     let data = {
+      clerkId: wx.getStorageSync('clerkId'),
       username: wx.getStorageSync('username'),
     }
     mClient.wxGetRequest(api.Info, data)

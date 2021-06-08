@@ -45,24 +45,25 @@
             <view class="goodsList {{item.productColor}}" wx:for="{{goodsRoadList}}" wx:key="index">
               <view class="goodsList_item">{{item.showNo}}</view>
               <view class="goodsList_item">
-                <view class="goodsNameWrap" data-id="{{item.id}}" bindtap="selectGoodsFn">
+                <view class="goodsNameWrap" data-id="{{item.id}}"> <!-- bindtap="selectGoodsFn"-->
                   <view class="goodsName" data-id="{{item.id}}">{{item.productName}}</view>
-                  <image class="bottom_img" src="/resource/img/bootom.png"></image>
+                  <!-- <image class="bottom_img" src="/resource/img/bootom.png"></image> -->
                 </view>
               </view>
-              <view class="goodsList_item">
+              <view class="goodsList_item">{{item.stock}}</view>
+              <view class="goodsList_item">{{item.pointStock}}</view>
+              <!-- <view class="goodsList_item">
                 <view class="stock compute {{item.isSub}}" data-id="{{item.id}}" data-quan="{{item.stock}}"
                   data-mark="sub" bindtap="btn_sub">-</view>
                 <view class="stock">{{item.stock}}</view>
-                <view class="stock compute {{item.isAdd}}" data-isadd="{{item.isAdd}}" data-id="{{item.id}}" data-quan="{{item.stock}}"
-                  data-mark="add" bindtap="btn_add">+</view>
+                <view class="stock compute {{item.isAdd}}" data-isadd="{{item.isAdd}}" data-id="{{item.id}}"
+                  data-quan="{{item.stock}}" data-mark="add" bindtap="btn_add">+</view>
                 <view class="computeTen {{item.isAdd}}" data-id="{{item.id}}" bindtap="productTenFn">10</view>
-              </view>
+              </view> -->
             </view>
           </view>
         </view>
       </view>
-
     </view>
   </view>
 </scroll-y>

@@ -9,7 +9,7 @@ Page({
     pageSize: '60',
     deviceId: '',
     selectGoodsDeviceId: false, //选择返回
-    goodsNavTitle: ['货道', '商品名称', '当前库存'],
+    goodsNavTitle: ['货道', '商品名称', '设备库存','门店库存'],
     goodsRoadList: [],
     isFlag: false,
     pull: {
@@ -133,7 +133,7 @@ Page({
                   element.isSub = '';
                 }
                 if (element.productId === '0') {
-                  element.productName = '请选择商品',
+                  element.productName = '空',
                     element.productColor = 'grayness',
                     element.isAdd = 'isAdd'
                 } else {
