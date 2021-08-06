@@ -7,10 +7,13 @@
     <image mode="aspectFill" src="/resource/img/background_img.png"></image>
   </view>
   <view class="login">
+   <view class="titelWrap">
     <view class="loginTitle">
-      店员登录
-      <view class="mask"></view>
+      {{isHidden?'店员登录':'管理员登录'}}
+      <view class="mask {{isHidden?'':'isMask'}}"></view>
     </view>
+    <view class="adminLogin" bindtap="personClassify">{{isHidden?'管理员登录':'店员登录'}} ></view>
+   </view>
     <form bindsubmit="formSubmit">
       <view class="phone-box">
         <icon class="iconfont icon iconshouji"></icon>
@@ -19,7 +22,7 @@
         <icon class="iconfont iconshanchu1 {{delete}}" bindtap="deleteFn"></icon>
       </view>
 
-      <view class="phone-box">
+      <view class="phone-box" hidden="{{!isHidden}}">
         <icon class="iconfont icon iconyanzhengma"></icon>
         <!-- placeholder-style="color:#bbb" -->
         <input name="verificationCode" type="number" placeholder="请输入验证码" placeholder-style="color:#B3B3B3;" maxlength="6" class="number"
@@ -27,6 +30,12 @@
         <view bindtap="getVerificationCode" class="getNum {{isRepeatGetNum}}" hover-class="getNum_hover"
           hover-stay-time="100">
           {{verificationControlText}}</view>
+      </view>
+
+      <view class="phone-box" hidden="{{isHidden}}">
+        <icon class="iconfont icon iconyanzhengma"></icon>
+        <input name="verificationPassword" type="password" placeholder="请输入密码" placeholder-style="color:#B3B3B3;" maxlength="20" class="number"
+          bindinput="bindInputPassword" />
       </view>
 
       <button class="btn" form-type="submit">立即登录</button>

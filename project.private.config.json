@@ -53,6 +53,12 @@
         {
           "name": "订单详情",
           "pathName": "pages/orderList/orderDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "报表",
+          "pathName": "pages/statement/index",
           "scene": null
         }
       ]

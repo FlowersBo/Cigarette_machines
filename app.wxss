@@ -2,9 +2,11 @@
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
 @import "/utils/fontFamily.wxss";
-page{
+
+page {
   font-family: 'Fira_Code';
 }
+
 .container {
   height: 100%;
   display: flex;
@@ -13,14 +15,16 @@ page{
   justify-content: space-between;
   padding: 0rpx 0;
   box-sizing: border-box;
-} 
-.fzcontainer{
+}
+
+.fzcontainer {
   box-sizing: border-box;
   height: 100%;
   padding: 20rpx;
 }
+
 /* 按钮及容器 */
-.btnbox{
+.btnbox {
   display: block;
   width: 100%;
   height: auto;
@@ -29,24 +33,25 @@ page{
   padding-top: 30rpx;
 }
 
-.btndefault{
+.btndefault {
   display: inline-block;
   min-width: 160rpx;
   height: 70rpx;
   background: #e2e2e2;
-  border:none;
+  border: none;
   font-size: 28rpx;
   color: #333333;
   line-height: 70rpx;
   margin-right: 20rpx;
   padding: 0 16rpx;
 }
-.bntconfirm{
+
+.bntconfirm {
   display: inline-block;
   min-width: 160rpx;
   height: 70rpx;
   background: orange;
-  border:none;
+  border: none;
   font-size: 28rpx;
   color: #ffffff;
   line-height: 70rpx;
@@ -54,13 +59,14 @@ page{
 }
 
 @font-face {
-  font-family: 'iconfont';  /* project id 2054761 */
+  font-family: 'iconfont';
+  /* project id 2054761 */
   src: url('//at.alicdn.com/t/font_2054761_ahi0xy9gj5.eot');
   src: url('//at.alicdn.com/t/font_2054761_ahi0xy9gj5.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_2054761_ahi0xy9gj5.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_2054761_ahi0xy9gj5.woff') format('woff'),
-  url('//at.alicdn.com/t/font_2054761_ahi0xy9gj5.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_2054761_ahi0xy9gj5.svg#iconfont') format('svg');
+    url('//at.alicdn.com/t/font_2054761_ahi0xy9gj5.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_2054761_ahi0xy9gj5.woff') format('woff'),
+    url('//at.alicdn.com/t/font_2054761_ahi0xy9gj5.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_2054761_ahi0xy9gj5.svg#iconfont') format('svg');
 }
 
 .iconfont {

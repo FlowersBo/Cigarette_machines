@@ -282,14 +282,14 @@ function getVerificationCode(data = {}) {
 };
 
 //phone login
-function loginPhone(loginInfo = {}) {
+function loginPhone(loginInfo = {}, loginUrl) {
   wx.showLoading({
     title: '登录中',
   })
   let param = objectToJsonParams(loginInfo);
   return new Promise(function (resolve, reject) {
     wx.request({
-      url: api.Login + param,
+      url: loginUrl + param,
       method: 'Post',
       header: {
         'Content-Type': 'application/json',

@@ -23,6 +23,11 @@ page {
   width: 100%;
 }
 
+.titelWrap{
+  display: flex;
+  justify-content: space-between;
+}
+
 .loginTitle {
   color: #666666;
   font-size: 32rpx;
@@ -31,10 +36,20 @@ page {
   margin-bottom: 40rpx;
 }
 .mask{
-  width: 50rpx;
+  width: 60rpx;
   height: 4rpx;
   background-color: #FF9900;
   margin-top: 4rpx;
+}
+
+.isMask{
+  width: 90rpx;
+}
+
+.adminLogin{
+  color: #5F5F5F;
+  margin-top: 6rpx;
+  font-size: 24rpx;
 }
 .phone-box {
   display: flex;

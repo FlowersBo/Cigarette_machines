@@ -6,7 +6,8 @@
     "pages/cs/index",
     "pages/orderList/index",
     "pages/index/selectGoods/index",
-    "pages/orderList/orderDetail/index"
+    "pages/orderList/orderDetail/index",
+    "pages/statement/index"
   ],
   "plugins": {
     "myPlugin": {
@@ -18,7 +19,6 @@
       "provider": "wx92c68dae5a8bb046"
     }
   },
-
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#5069A1",
@@ -40,6 +40,7 @@
     }
   },
   "tabBar": {
+    "custom": true,
     "color": "#646464",
     "selectedColor": "#FF9900",
     "list": [
@@ -48,6 +49,12 @@
         "text": "商品",
         "iconPath": "assets/tabbar/baobiao.png",
         "selectedIconPath": "assets/tabbar/baobiao-h.png"
+      }, 
+      {
+        "pagePath": "pages/statement/index",
+        "text": "报表",
+        "iconPath": "assets/tabbar/statement.png",
+        "selectedIconPath": "assets/tabbar/statement-h.png"
       },
       {
         "pagePath": "pages/orderList/index",

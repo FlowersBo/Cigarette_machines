@@ -1,42 +1,46 @@
 <!--pages/user/index.wxml-->
-<cu-custom bgColor="bg-user-color" class="custom">
-  <view slot="content">我的</view>
-</cu-custom>
-<scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
-  style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
-  bindtoload="toload">
-  <view class="userWrap">
-    <view class="user">
-      <view class="user_logo">
-        <image mode="aspectFit" src="{{userInfo.logoUrl?userInfo.logoUrl:'../../resource/img/user_img.png'}}"
-          data-url='{{userInfo.logoUrl}}' bindtap="topic_preview">
-        </image>
-      </view>
-      <view class="userInfo">
-        <view class="user_name">{{userInfo.user}}</view>
-        <view class="user_phone">{{userInfo.mobile}}</view>
-      </view>
-    </view>
-    <view class="marketMoneyWrap">
-      <view class="phone">
-        <view class="phoneNumber">所属门店：{{userInfo.pointName}}</view>
-      </view>
-      <view class="phone" data-phone="{{userInfo.serviceTel}}" bindtap="openPhone">
-        <view class="phoneNumber">联系运营商：{{userInfo.serviceTel}}</view>
-        <view>
-          <icon class="iconfont icondianhua"></icon>
-          <icon class="iconfont iconperson-right"></icon>
-        </view>
-      </view>
-      <view class="userBtn" hover-class="getNum_hover" hover-stay-time="100" bindtap="bindLogOut">退出登录</view>
-    </view>
-    <mask id="mask" openSetting="{{openSetting}}" bind:statusNumber="statusNumberFn">
-      <view slot='isTitle'>提示</view>
-      <view slot='isContent'>您确认要退出登录吗？</view>
-    </mask>
+<view class='cu-custom'>
+  <view class="cu-bar fixed bg-shadeTop" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+    </navigator>
+    <view class='content' style='top:{{StatusBar}}px;'>我的</view>
   </view>
+</view>
 
-</scroll-y>
+<view class="userWrap">
+  <view class="userNavImg">
+    <image src="/resource/img/userNavImg.png"></image>
+  </view>
+  <view class="user">
+    <view class="user_logo">
+      <image mode="aspectFit" src="{{userInfo.logoUrl?userInfo.logoUrl:'../../resource/img/user_img.png'}}"
+        data-url='{{userInfo.logoUrl}}' bindtap="topic_preview">
+      </image>
+    </view>
+    <view class="userInfo">
+      <view class="user_name">{{userInfo.user}}</view>
+      <view class="user_phone">{{userInfo.mobile}}</view>
+    </view>
+  </view>
+  <view class="marketMoneyWrap">
+    <view class="phone">
+      <view class="phoneNumber">所属门店：{{userInfo.pointName}}</view>
+    </view>
+    <view class="phone" data-phone="{{userInfo.serviceTel}}" bindtap="openPhone">
+      <view class="phoneNumber">联系运营商：{{userInfo.serviceTel}}</view>
+      <view>
+        <icon class="iconfont icondianhua"></icon>
+        <icon class="iconfont iconperson-right"></icon>
+      </view>
+    </view>
+    <view class="userBtn" hover-class="getNum_hover" hover-stay-time="100" bindtap="bindLogOut">退出登录</view>
+  </view>
+  <mask id="mask" openSetting="{{openSetting}}" bind:statusNumber="statusNumberFn">
+    <view slot='isTitle'>提示</view>
+    <view slot='isContent'>您确认要退出登录吗？</view>
+  </mask>
+</view>
+
 
 <!-- <view class="header">
   <image class="ship" src="../../resource/img/timg.png"></image>

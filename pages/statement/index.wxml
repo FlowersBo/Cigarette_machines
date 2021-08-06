@@ -1,0 +1,60 @@
+<!--pages/statement/index.wxml-->
+<cu-custom bgColor="bg-user-color" class="custom">
+  <view slot="content">报表</view>
+</cu-custom>
+<!--index.wxml-->
+<view class="nav_title">
+  <view class="nav_tab">
+    <view class="{{dateRange==index?'hidden':'show'}}" wx:for="{{dateRangeText}}" wx:key="index"
+      data-index="{{index}}" bindtap="selectedDateRange">
+      {{item}}
+    </view>
+  </view>
+  <view class="salesWrap">
+    <view class="sales_title">
+      <view class="title_line"></view> 总计 <view class="title_line"></view>
+    </view>
+    <view class="sales" id="sales">
+      <view class="sales_list" wx:for="{{reportTotal}}" wx:key="index" wx:for-index="key" data-item="item">
+        <view class="quantity">{{key}}</view>
+        <view class="num">{{item}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="detail">
+    <view class="explain">
+      销售明细(<text>{{pointDetaillyDate}}</text>)
+    </view>
+    <view class="point_name">
+      <input confirm-type="search" value="{{serchContent}}" bindconfirm="bindPointSerch" placeholder="门店名称" />
+      <icon class="iconfont iconfangdajing"></icon>
+    </view>
+  </view>
+  <view class="tabTit box {{floorstatus?'tabTit_fixed':''}}">
+    <view class="flex1" wx:for="{{reportDetail.titles}}" wx:key="type" data-index="{{index}}" bindtap="bindPointSort">
+      <label>
+        <text>{{item}}</text>
+        <image src="{{reportDetail.titleUrls[index]}}" class="coding_flash_image"></image>
+      </label>
+    </view>
+  </view>
+  <view class="list">
+    <block wx:for="{{pointsDatas}}" wx:key="list" wx:for-item="item">
+      <view class="list_item {{index%2==0?'bac_a':''}}">
+        <view class="info box">
+          <view class="title flex1 ">{{item.pointName?item.pointName:item.pointAddress}}</view>
+          <view class="price flex1 " style="color:#d81e06">￥{{item.priceSum>=0?item.priceSum:item.saleMoney}}</view>
+          <view class="num flex1 ">{{item.pointOrderCount?item.pointOrderCount:item.orderCount}}</view>
+          <view class="report_details flex1 ">{{item.rentalRate}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="{{isFlag?'iconWrap':'iconNone'}}">
+    <icon class="iconfont mask_icon iconzanwushuju"></icon>
+    <text class="icon_text">暂无数据，亲亲稍后再来吧~~</text>
+  </view>
+  <view class="pull-refresh {{push.isLoading?chu:jin}}">
+    <view class="fs24 pt20 f-color-666 z-index-1">{{push.pullText}}</view>
+  </view>
+</view>

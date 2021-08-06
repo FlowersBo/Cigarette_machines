@@ -13,6 +13,9 @@ Page({
     isShow: true,
     userInfo: '',
     AccountSharingProportion: '',
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
+    Custom: app.globalData.Custom,
   },
 
   /**
@@ -58,11 +61,23 @@ Page({
   },
 
   userInfoFn: () => {
-    let data = {
-      clerkId: wx.getStorageSync('clerkId'),
-      username: wx.getStorageSync('username'),
+    let url = '',
+      data = '';
+    if (wx.getStorageSync('clerkId')) {
+      url = api.Info;
+      data = {
+        clerkId: wx.getStorageSync('clerkId'),
+        username: wx.getStorageSync('username'),
+      }
+    } else {
+      url = api.MerchantInfo;
+      data = {
+        clerkId: wx.getStorageSync('clerkId'),
+        merchantId: wx.getStorageSync('username'),
+      }
     }
-    mClient.wxGetRequest(api.Info, data)
+
+    mClient.wxGetRequest(url, data)
       .then(resp => {
         console.log('我的返回', resp);
         if (resp.data.code == 200) {
@@ -135,16 +150,21 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    const query = wx.createSelectorQuery().in(this)
-    query.selectAll('.custom').boundingClientRect(function (res) {
-      const customHeight = res[0].height;
-      that.setData({
-        customHeight: customHeight
-      })
-    }).exec()
+    // const query = wx.createSelectorQuery().in(this)
+    // query.selectAll('.custom').boundingClientRect(function (res) {
+    //   const customHeight = res[0].height;
+    //   that.setData({
+    //     customHeight: customHeight
+    //   })
+    // }).exec()
   },
 
   onShow: function () {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 2
+      })
+    }
     //瀑布流的效果
     setTimeout(function () {
       app.sliderightupshow(this, 'slide_up1', 110, 165, 1)

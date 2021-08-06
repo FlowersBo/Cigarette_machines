@@ -1,8 +1,9 @@
 //app.js
 App({
   globalData: {
-    // siteroot: 'http://192.168.1.129:8080',
-    userTouch: 0
+    userTouch: 0,
+    selected: null,
+    list: []
   },
   onShow: function (options) {
     console.log("app-onShow");
@@ -16,6 +17,50 @@ App({
 
   onLaunch: function () {
     const that = this;
+    let id = 2;
+    if (id == 1) {
+      //第一种tabbar
+      this.globalData.list = [{
+          pagePath: "/pages/index/index",
+          text: "商品",
+          iconPath: "/assets/tabbar/baobiao.png",
+          selectedIconPath: "/assets/tabbar/baobiao-h.png"
+        },
+        {
+          pagePath: "/pages/orderList/index",
+          text: "订单",
+          iconPath: "/assets/tabbar/dingdan.png",
+          selectedIconPath: "/assets/tabbar/dingdan-h.png"
+        },
+        {
+          pagePath: "/pages/user/index",
+          text: "我的",
+          iconPath: "/assets/tabbar/menu-mine.png",
+          selectedIconPath: "/assets/tabbar/menu-mine-h.png"
+        }
+      ]
+    } else {
+      this.globalData.list = [{
+          pagePath: "/pages/statement/index",
+          text: "报表",
+          iconPath: "/assets/tabbar/statement.png",
+          selectedIconPath: "/assets/tabbar/statement-h.png"
+        },
+        {
+          pagePath: "/pages/orderList/index",
+          text: "订单",
+          iconPath: "/assets/tabbar/dingdan.png",
+          selectedIconPath: "/assets/tabbar/dingdan-h.png"
+        },
+        {
+          pagePath: "/pages/user/index",
+          text: "我的",
+          iconPath: "/assets/tabbar/menu-mine.png",
+          selectedIconPath: "/assets/tabbar/menu-mine-h.png"
+        }
+      ]
+    };
+
     this.autoUpdate();
     wx.getSystemInfo({
       success: e => {

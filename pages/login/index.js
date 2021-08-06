@@ -13,6 +13,13 @@ Page({
     isRepeatClick: false, //是否重复按下获取验证码
     isVerifyOutTime: true,
     delete: 'delete',
+    isHidden: true
+  },
+
+  personClassify: () => {
+    that.setData({
+      isHidden: !that.data.isHidden
+    })
   },
 
   /**
@@ -70,6 +77,13 @@ Page({
     that.setData({
       verificationCode: verificationCode
     });
+  },
+
+  // 获取密码
+  bindInputPassword: e => {
+    that.setData({
+      verificationPassword: e.detail.value
+    })
   },
 
   // 点击获取验证码并验证手机号是否可用
@@ -162,6 +176,7 @@ Page({
   formSubmit: function (e) {
     const phoneNumber = e.detail.value.phoneNumber;
     const verificationCode = e.detail.value.verificationCode;
+    const verificationPassword = e.detail.value.verificationPassword;
     if (phoneNumber.length == 0) {
       wx.showToast({
         title: '请填写手机号码',
@@ -177,16 +192,23 @@ Page({
         duration: 2000
       })
       return;
-    } else if (verificationCode.length == 0) {
+    } else if (that.data.isHidden && verificationCode.length == 0) {
       wx.showToast({
         title: '请填写验证码',
         icon: 'none',
         duration: 1000
       });
       return;
-    } else if (verificationCode.length < 6) {
+    } else if (that.data.isHidden && verificationCode.length < 6) {
       wx.showToast({
         title: '验证码有误',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    } else if (that.data.isHiddden === false && verificationPassword.length == 0) {
+      wx.showToast({
+        title: '手机号或密码不正确',
         icon: 'none',
         duration: 2000
       })
@@ -195,12 +217,24 @@ Page({
       mClient.login()
         .then(resp => {
           console.log('js_code', resp);
-          let loginInfo = {
-            username: parseInt(phoneNumber),
-            smscode: verificationCode,
-            js_code: resp
-          };
-          mClient.loginPhone(loginInfo)
+          let loginInfo = '';
+          let loginUrl = '';
+          if (that.data.isHidden) {
+            loginInfo = {
+              username: parseInt(phoneNumber),
+              smscode: verificationCode,
+              js_code: resp
+            };
+            loginUrl = api.Login
+          } else {
+            loginInfo = {
+              username: parseInt(phoneNumber),
+              password: verificationPassword,
+              js_code: resp
+            };
+            loginUrl = api.merchantLogn
+          }
+          mClient.loginPhone(loginInfo, loginUrl)
             .then((resp) => {
               console.log('登录返回', resp);
               if (resp.data.code == 200) {
