@@ -7,6 +7,7 @@ Component({
   },
   // 生命周期
   attached() {
+    console.log('生命周期');
     console.log(app.globalData.list)
     this.setData({
       list:app.globalData.list

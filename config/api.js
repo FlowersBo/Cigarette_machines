@@ -8,6 +8,7 @@ module.exports = {
     VerificationCode: ApiRootUrl + 'tobaccos/user/v2/smscode', //验证码
 
     Info: ApiRootUrl + 'tobaccos/user/v2/info', //用户信息
+    MerchantInfo: ApiRootUrl + 'tobaccos/user/v2/merchantInfo', //运营商信息
 
     DeviceList: ApiRootUrl + 'tobaccos/product/deviceList', //设备列表
 
@@ -23,12 +24,11 @@ module.exports = {
 
     ProductPrice: ApiRootUrl + 'tobaccos/order/checkedProductPrice', //退款选择后计算金额
     WxRefund: ApiRootUrl + 'tobaccos/order/wx_refund', //退款
-    ManualShipment: ApiRootUrl + 'tobaccos/order/manual_shipment', //手动退货
+    ManualShipment: ApiRootUrl + 'tobaccos/rder/manual_shipment', //手动退货
 
-    MerchantInfo: ApiRootUrl + 'tobaccos/user/v2/merchantInfo', //运营商信息
-    QuantityTotal: ApiRootUrl + 'tobaccos/report/history/total', //销售总额
-    Historylist: ApiRootUrl + 'tobaccos/report/history/list', //点位销售数据排行
+    QuantityTotal: ApiRootUrl + 'tobaccos/report/history/total', //时间段销售总额
+    Historylist: ApiRootUrl + 'tobaccos/report/history/list', //时间段点位销售列表
 
     Todaytotal: ApiRootUrl + '/tobaccos/report/today/total', //今日销售总额
-    TodayRankingList: ApiRootUrl + 'tobaccos/report/today/list', //今日点位销售额排行榜
+    TodayRankingList: ApiRootUrl + 'tobaccos/report/today/list', //今日点位销售列表
 }

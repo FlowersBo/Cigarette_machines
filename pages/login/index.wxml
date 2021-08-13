@@ -9,10 +9,10 @@
   <view class="login">
    <view class="titelWrap">
     <view class="loginTitle">
-      {{isHidden?'店员登录':'管理员登录'}}
+      {{isHidden?'店员登录':'运营商登录'}}
       <view class="mask {{isHidden?'':'isMask'}}"></view>
     </view>
-    <view class="adminLogin" bindtap="personClassify">{{isHidden?'管理员登录':'店员登录'}} ></view>
+    <view class="adminLogin" bindtap="personClassify">{{isHidden?'运营商登录':'店员登录'}} ></view>
    </view>
     <form bindsubmit="formSubmit">
       <view class="phone-box">

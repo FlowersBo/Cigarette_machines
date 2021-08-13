@@ -73,7 +73,7 @@ Page({
       url = api.MerchantInfo;
       data = {
         clerkId: wx.getStorageSync('clerkId'),
-        merchantId: wx.getStorageSync('username'),
+        merchantId: wx.getStorageSync('info').merchantId,
       }
     }
 

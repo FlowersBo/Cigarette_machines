@@ -150,7 +150,7 @@ const wxGetRequest = (url, data = {}, method = 'GET') => {
         } else {
           resolve(resp.data);
         }
-        if (!resp.data.message) {
+        if (!resp.data) {
           wx.showToast({
             title: '服务器错误，请稍后重试',
             icon: 'none',
@@ -210,9 +210,14 @@ function login() {
 
 //refresh Token
 function refreshToken() {
+  let role = wx.getStorageSync('role');
+  let data = {
+    role: role
+  }
+  let param = objectToJsonParams(data);
   return new Promise(function (resolve, reject) {
     wx.request({
-      url: api.RefreshAuth,
+      url: api.RefreshAuth + param,
       method: 'Post',
       header: {
         'charset': 'utf-8',
@@ -220,7 +225,7 @@ function refreshToken() {
         'grant-type': 'refresh-token',
         'app-refresh-token': wx.getStorageSync('refreshToken'),
         'app-access-token': wx.getStorageSync('accessToken'),
-        'username': wx.getStorageSync('username'),
+        'username': wx.getStorageSync('username')
       },
       success: function (resp) {
         if (resp.data.code == 200) {
@@ -300,7 +305,8 @@ function loginPhone(loginInfo = {}, loginUrl) {
           wx.setStorageSync('accessToken', resp.data.data.access_token);
           wx.setStorageSync('refreshToken', resp.data.data.refresh_token);
           wx.setStorageSync('username', resp.data.data.username);
-          wx.setStorageSync('MerchantID', resp.data.data.info.MerchantID);
+          wx.setStorageSync('info', resp.data.data.info);
+          wx.setStorageSync('merchantId', resp.data.data.info.merchantId);
         }
         if (!resp.data.message) {
           wx.showToast({

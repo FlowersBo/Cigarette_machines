@@ -38,7 +38,7 @@ Page({
       pageSize: that.data.pageSize,
       pageIndex,
       searchStr,
-      merchantId: wx.getStorageSync('MerchantID')
+      merchantId: wx.getStorageSync('merchantId')
     }
     mClient.wxGetRequest(api.GoodsRoadProductList, data)
       .then(res => {

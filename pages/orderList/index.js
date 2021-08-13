@@ -110,12 +110,24 @@ Page({
     that.setData({
       isFlag: false
     })
-    const data = {
-      pageSize: that.data.pageSize,
-      pageIndex,
-      pointId: wx.getStorageSync('pointId'),
-      searchDate,
-      orderStatus
+    let role = wx.getStorageSync('role');
+    let data = {};
+    if (role != 'merchant') {
+      data = {
+        pageSize: that.data.pageSize,
+        pageIndex,
+        pointId: wx.getStorageSync('pointId'),
+        searchDate,
+        orderStatus
+      }
+    } else {
+      data = {
+        pageSize: that.data.pageSize,
+        pageIndex,
+        merchantId: wx.getStorageSync('merchantId'),
+        searchDate,
+        orderStatus
+      }
     }
     mClient.wxGetRequest(api.OrderList, data)
       .then(res => {
@@ -301,7 +313,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (typeof this.getTabBar === 'function' &&  this.getTabBar()) {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
         selected: 1
       })

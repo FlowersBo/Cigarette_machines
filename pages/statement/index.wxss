@@ -26,6 +26,11 @@
   background-color: #fff;
 }
 
+/* .show::before {
+  content: '';
+  border-left: 1rpx solid #FF9900;
+} */
+
 .hidden {
   flex: 1;
   font-size: 28rpx;

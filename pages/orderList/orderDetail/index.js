@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showModalStatus: false
+    showModalStatus: false,
   },
 
   /**
@@ -17,6 +17,9 @@ Page({
    */
   onLoad: function (options) {
     that = this;
+    that.setData({
+    role: wx.getStorageSync('role')
+    })
     this.mask = this.selectComponent('#mask');
     // console.log(options)
     // let orderid = options.orderid;

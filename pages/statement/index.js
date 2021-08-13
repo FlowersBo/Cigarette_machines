@@ -2,7 +2,8 @@ import * as mClient from '../../utils/requestUrl';
 import * as api from '../../config/api';
 import * as util from '../../utils/util';
 import {
-  OrderDetails
+  OrderDetails,
+  OrderList
 } from '../../config/api';
 let that;
 
@@ -35,15 +36,13 @@ Page({
     serchContent: '',
     pointsData: [], //列表
     isFlag: false,
-    pointsDatas: [{ pointName: '可好专卖店',priceSum: 2000,pointOrderCount: 100,rentalRate: 170},
-      {pointName: '便利蜂专卖店便利蜂专卖店便利蜂专卖店便利蜂专卖店',priceSum: 3000,pointOrderCount: 200,rentalRate: 220}]
   },
 
   onLoad: function () {
     that = this;
     let dateRange = that.data.dateRange;
-    this.renderReport(dateRange);
     this.renderTransactionSummation(dateRange);
+    this.renderReport(dateRange);
   },
 
   onShow: function () {
@@ -79,6 +78,9 @@ Page({
     this.renderReport(dateRange);
   },
 
+
+
+  //tab选择
   selectedDateRange: function (e) {
     let that = this;
     setTimeout(function () {
@@ -113,6 +115,8 @@ Page({
       let pointDetaillyDate = util.customFormatOnlyMonthDay(pointReportDate);
       this.setData({
         pointDetaillyDate: pointDetaillyDate,
+        startDate: startDate,
+        endDate: endDate
       });
     }
 
@@ -124,6 +128,8 @@ Page({
       let pointDetaillyDate = util.customFormatOnlyMonthDay(pointReportDate);
       this.setData({
         pointDetaillyDate: pointDetaillyDate,
+        startDate: startDate,
+        endDate: endDate
       });
     }
 
@@ -139,6 +145,8 @@ Page({
       let pointDetaillyDate = pointDetaillyStartDate + '~' + pointDetaillyEndDate;
       this.setData({
         pointDetaillyDate: pointDetaillyDate,
+        startDate: startDate,
+        endDate: endDate
       });
     }
 
@@ -154,6 +162,8 @@ Page({
       let pointDetaillyDate = pointDetaillyStartDate + '~' + pointDetaillyEndDate;
       this.setData({
         pointDetaillyDate: pointDetaillyDate,
+        startDate: startDate,
+        endDate: endDate
       });
     }
   },
@@ -167,27 +177,36 @@ Page({
     let pointTotal = that.data.pointTotal;
     let reportTotal = that.data.reportTotal;
     let data = {
-      pageindex: pageIndex,
-      pagesize: pageSize,
+      pageNum: pageIndex,
+      pageSize: pageSize,
+      startDate: that.data.startDate,
+      endDate: that.data.endDate,
+      merchantId: wx.getStorageSync('merchantId'),
       salesVolumeSort: salesVolumeSort,
       orderQuantitySort: orderQuantitySort,
       pointName: serchContent,
-      id: wx.getStorageSync('userID'),
     };
     let apiUrl = '';
+    let apiListUrl = '';
     if (dateRange === 0) {
-      apiUrl = api.QuantityTotal;
+      apiUrl = api.Todaytotal;
+      apiListUrl = api.TodayRankingList;
     } else if (dateRange === 1) {
-      apiUrl = api.lastSevendaysData;
+      apiUrl = api.QuantityTotal;
+      apiListUrl = api.Historylist;
     } else if (dateRange === 2) {
-      apiUrl = api.lastMonthData;
+      apiUrl = api.QuantityTotal;
+      apiListUrl = api.Historylist;
     } else if (dateRange === 3) {
-      apiUrl = api.lastTwoMonthData;
+      apiUrl = api.QuantityTotal;
+      apiListUrl = api.Historylist;
     }
-    mClient.wxGetRequest(apiUrl, data)
+    that.QuantityTotalFn(apiUrl);
+    mClient.wxGetRequest(apiListUrl, data)
       .then(resp => {
-        if (resp.data.code == '200') {
-          pointsData = pointsData.concat(resp.data.data.list2); //列表
+        if (resp.data.code == 0) {
+          console.log('列表', resp);
+          pointsData = pointsData.concat(resp.data.data.list); //列表
           for (const key in pointsData) {
             pointsData[key].rentalRate = parseFloat(pointsData[key].rentalRate).toFixed(2)
           }
@@ -201,18 +220,10 @@ Page({
             })
           }
           pointTotal = resp.data.data.total;
-          if (resp.data.data.list[0]) {
-            reportTotal['销售额（元）'] = resp.data.data.list[0].priceSum;
-            reportTotal['订单量（次）'] = resp.data.data.allOrderCount;
-          } else {
-            reportTotal['销售额（元）'] = 0;
-            reportTotal['订单量（次）'] = 0;
-          }
           this.setData({
             pointsData: pointsData,
             pageIndex: pageIndex + 1,
             pointTotal: pointTotal,
-            reportTotal: reportTotal
           });
         } else {
           that.setData({
@@ -230,6 +241,26 @@ Page({
           isFlag: true
         })
       })
+  },
+
+  //销量
+  async QuantityTotalFn(apiUrl) {
+    let reportTotal = that.data.reportTotal;
+    let data = {
+      merchantId: wx.getStorageSync('merchantId'),
+      startDate: that.data.startDate,
+      endDate: that.data.endDate,
+    };
+    let result = await (mClient.wxGetRequest(apiUrl, data));
+    console.log('测试总销量', result);
+    if (result.data.code == 0) {
+      reportTotal['销售额（元）'] = result.data.data.orderAmount;
+      reportTotal['订单量（单）'] = result.data.data.orderCount;
+      reportTotal['销售量（盒）'] = result.data.data.ProductCount;
+      that.setData({
+        reportTotal: reportTotal
+      })
+    }
   },
 
   bindPointSerch: function (e) {
@@ -255,6 +286,8 @@ Page({
     that.renderReport(dateRange, serchContent, pageIndex, pointsData);
   },
 
+
+  //排序
   bindPointSort: function (e) {
     let that = this;
     var query = wx.createSelectorQuery().in(this);
@@ -352,6 +385,7 @@ Page({
     that.renderReport(dateRange, '', pageIndex, pointsData);
   },
 
+
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -365,8 +399,8 @@ Page({
   onReachBottom: function (e) {
     let pointsData = that.data.pointsData;
     let pageIndex = that.data.pageIndex;
-    let dateRange = that.data.dateRange;
     let pageSize = that.data.pageSize;
+    let dateRange = that.data.dateRange;
     let pointTotal = that.data.pointTotal;
     let serchContent = that.data.serchContent;
     console.log('下一页', pageIndex);

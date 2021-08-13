@@ -2,6 +2,53 @@
 let that;
 import * as mClient from '../../utils/requestUrl';
 import * as api from '../../config/api';
+let globalData = getApp().globalData;
+
+function TabBarList() {
+  let role = wx.getStorageSync('role');
+  if (role != 'merchant') {
+    globalData.list = [{
+        pagePath: "/pages/index/index",
+        text: "商品",
+        iconPath: "/assets/tabbar/baobiao.png",
+        selectedIconPath: "/assets/tabbar/baobiao-h.png"
+      },
+      {
+        pagePath: "/pages/orderList/index",
+        text: "订单",
+        iconPath: "/assets/tabbar/dingdan.png",
+        selectedIconPath: "/assets/tabbar/dingdan-h.png"
+      },
+      {
+        pagePath: "/pages/user/index",
+        text: "我的",
+        iconPath: "/assets/tabbar/menu-mine.png",
+        selectedIconPath: "/assets/tabbar/menu-mine-h.png"
+      }
+    ]
+  } else {
+    globalData.list = [{
+        pagePath: "/pages/statement/index",
+        text: "报表",
+        iconPath: "/assets/tabbar/statement.png",
+        selectedIconPath: "/assets/tabbar/statement-h.png"
+      },
+      {
+        pagePath: "/pages/orderList/index",
+        text: "订单",
+        iconPath: "/assets/tabbar/dingdan.png",
+        selectedIconPath: "/assets/tabbar/dingdan-h.png"
+      },
+      {
+        pagePath: "/pages/user/index",
+        text: "我的",
+        iconPath: "/assets/tabbar/menu-mine.png",
+        selectedIconPath: "/assets/tabbar/menu-mine-h.png"
+      }
+    ]
+  };
+}
+
 Page({
 
   /**
@@ -27,6 +74,7 @@ Page({
    */
   onLoad: function (options) {
     that = this;
+    TabBarList();
     that.setData({
       phoneNumber: wx.getStorageSync('username')
     })
@@ -239,6 +287,8 @@ Page({
               console.log('登录返回', resp);
               if (resp.data.code == 200) {
                 wx.setStorageSync('clerkId', resp.data.data.clerkId);
+                wx.setStorageSync('role', resp.data.data.role);
+                TabBarList();
                 wx.switchTab({
                   url: '../user/index'
                 });
