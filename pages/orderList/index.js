@@ -40,8 +40,9 @@ Page({
       text: '已退款'
     }],
     selectarray: '请选择状态',
-    orderStatus: ''
+    orderStatus: '',
   },
+
 
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value);
@@ -68,27 +69,26 @@ Page({
   },
 
   //点击确认日期从组件上传来数据
-  // dateModalData: function (e) {
-  //   wx.showToast({
-  //     icon: 'none',
-  //     title: e.detail.datetime + e.detail.times,
-  //   })
-  // },
-  // //即时入驻
-  // todayEven: function (e) {
-  //   wx.showToast({
-  //     icon: 'none',
-  //     title: e.detail.today + e.detail.times,
-  //   })
-  // },
+  dateModalData: function (e) {
+    wx.showToast({
+      icon: 'none',
+      title: e.detail.datetime + e.detail.times,
+    })
+  },
+  //即时入驻
+  todayEven: function (e) {
+    wx.showToast({
+      icon: 'none',
+      title: e.detail.today + e.detail.times,
+    })
+  },
+  
 
-  // claendarHidden: () => {
-  //   that.setData({
-  //     isShow: true
-  //   })
-  // },
-
-
+  claendarHidden: () => {
+    that.setData({
+      isShow: true
+    })
+  },
 
 
   /**

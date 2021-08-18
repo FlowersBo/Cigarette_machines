@@ -146,6 +146,7 @@ Page({
       })
     }, 1500)
   },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -161,10 +162,12 @@ Page({
 
   onShow: function () {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      console.log('Tabbar列表', app.globalData.list);
       this.getTabBar().setData({
         selected: 2
       })
     }
+
     //瀑布流的效果
     setTimeout(function () {
       app.sliderightupshow(this, 'slide_up1', 110, 165, 1)

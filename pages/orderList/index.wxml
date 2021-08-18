@@ -17,14 +17,14 @@
           <input class="weui-input" disabled='true' value="{{selectarray}}"></input>
         </view>
       </picker>
-      <image src="../../assets/img/timg.png" alt="" mode="aspectFit" />
+      <image class="pickerImg {{isShow?'pickerImg-on':''}}" src="../../assets/img/timg.png" alt="" mode="aspectFit" />
     </view>
 
     <view class="orderDate" title="日期">
       <picker data-field="date" mode="date" value="{{date}}" bindchange="bindDateChange">
         <input class="weui-input" placeholder="请选择日期" disabled='true' value="{{date}}"></input>
       </picker>
-      <image src="../../assets/img/timg.png" alt="" mode="aspectFit" />
+      <image class="pickerImg" src="../../assets/img/timg.png" alt="" mode="aspectFit" />
     </view>
   </view>
   <!-- <dateModal bind:dateModalData="dateModalData" isshowDatemodal="{{isshowDate}}" bind:todayEven="todayEven" /> -->

@@ -2,6 +2,9 @@
 let that;
 import * as mClient from '../../utils/requestUrl';
 import * as api from '../../config/api';
+import {
+  OrderDetails
+} from '../../config/api';
 let globalData = getApp().globalData;
 
 function TabBarList() {
@@ -101,7 +104,7 @@ Page({
       delete: 'delete'
     })
   },
-  // 获取手机号
+  // 获取手机号 //18005422799
   bindInputPhoneNumber: (e) => {
     const phoneNumber = e.detail.value;
     if (phoneNumber.length > 0) {
@@ -118,6 +121,7 @@ Page({
       phoneNumber: phoneNumber
     })
   },
+
 
   // 获取验证码
   bindInputVerificationCode: (e) => {
