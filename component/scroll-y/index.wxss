@@ -18,8 +18,9 @@
 }
 
 .icon-refresh {
-  width: 70rpx;
-  height: 70rpx;
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 6rpx;
 }
 
 .chu {
@@ -28,6 +29,13 @@
 
 .jin {
   height: 0rpx;
+}
+
+.refresh-off{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* 加载 */
