@@ -31,12 +31,7 @@
   height: 0rpx;
 }
 
-.refresh-off{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
+
 
 /* 加载 */
 /* .pull-refreshs {
