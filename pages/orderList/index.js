@@ -131,7 +131,7 @@ Page({
     }
     mClient.wxGetRequest(api.OrderList, data)
       .then(res => {
-        console.log("订单列表", res);
+        console.log("订单列表数据", res);
         if (res.data.code == "200") {
           let orderList = res.data.data.orderList;
           // that.setData({
