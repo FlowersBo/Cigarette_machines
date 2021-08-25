@@ -1,5 +1,5 @@
 <!--pages/orderList/index.wxml-->
-<import src="index.skeleton.wxml"/>
+<import src="index.skeleton.wxml" />
 <template is="skeleton" wx-if="{{loading}}" />
 <!-- bgColor="bg-user-color" -->
 <cu-custom bgColor="bg-user-color" class="custom">
@@ -17,7 +17,7 @@
           <input class="weui-input" disabled='true' value="{{selectarray}}"></input>
         </view>
       </picker>
-      <image class="pickerImg {{isShow?'pickerImg-on':''}}" src="../../assets/img/timg.png" alt="" mode="aspectFit" />
+      <image class="pickerImg" src="../../assets/img/timg.png" alt="" mode="aspectFit" />
     </view>
 
     <view class="orderDate" title="日期">
@@ -109,6 +109,18 @@
   </view>
   <noData isFlag="{{isFlag}}"></noData>
 </scroll-y>
+<!-- 悬浮球 -->
+<!-- catchtap='refresh' -->
+<view class='refresh' catchtouchmove="buttonMove" bindtouchstart="buttonStart" bindtouchend="buttonEnd"
+  catchtap="bindBall" style="top:{{ btnTop }}px;left:{{ btnLeft }}px">
+  <image src='../../assets/img/fangdajing.png'></image>
+  <block wx:for="{{ballList}}" wx:key="index">
+    <view class="ball" animation="{{item.itemAnimation}}" data-index="{{index}}">
+      {{item.name}}
+    </view>
+  </block>
+</view>
+
 <!-- <view class="{{isFlag?'iconWrap':'iconNone'}}">
   <icon class="iconfont icon iconzanwushuju"></icon>
   <text class="icon_text">暂无数据，亲亲稍后再来吧~~</text>

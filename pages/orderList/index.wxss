@@ -269,3 +269,35 @@
 .icon_text {
   color: #8a9219;
 } */
+
+/* 悬浮球 */
+.refresh {
+  width: 90rpx;
+  height: 90rpx;
+  position: fixed;
+  z-index: 100000;
+  border-radius: 50%;
+  background: #535681;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ 
+.refresh image {
+  width: 50rpx;
+  height: 50rpx;
+  background-color: transparent;
+}
+
+.ball{
+  position: absolute;
+  width: 70rpx;
+  height: 70rpx;
+  background: rgb(80, 146, 13);
+  border-radius: 50%;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  line-height: 70rpx;
+  opacity: 0;
+}

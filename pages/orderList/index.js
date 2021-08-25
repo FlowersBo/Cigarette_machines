@@ -41,6 +41,19 @@ Page({
     }],
     selectarray: '请选择状态',
     orderStatus: '',
+    ballList: [{
+      name: 0
+    }, {
+      name: 1
+    }, {
+      name: 2
+    }, {
+      name: 3
+    }, {
+      name: 4
+    }, {
+      name: 5
+    }]
   },
 
 
@@ -82,7 +95,7 @@ Page({
       title: e.detail.today + e.detail.times,
     })
   },
-  
+
 
   claendarHidden: () => {
     that.setData({
@@ -103,7 +116,167 @@ Page({
     })
     let pageIndex = '1';
     that.orderListFn(pageIndex);
+
+    // 获取适配参数
+    wx.getSystemInfo({
+      success(res) {
+        let isIpx = res;
+        console.log('配置参数', isIpx);
+        that.setData({
+          isIpx
+        })
+        // 获取屏幕的大小
+        let windowHeight = wx.getSystemInfoSync().windowHeight
+        let windowWidth = wx.getSystemInfoSync().windowWidth
+        let btnTop = isIpx ? windowHeight - 134 : windowHeight - 100
+        that.setData({
+          windowHeight,
+          windowWidth,
+          btnLeft: windowWidth - 45,
+          btnTop
+        })
+      }
+    })
   },
+
+
+  // 悬浮球开始移动
+  buttonStart(e) {
+    console.log('获取起始点', e)
+    this.setData({
+      startPoint: e.touches[0]
+    })
+  },
+
+  // 悬浮球
+  buttonMove(e) {
+    let {
+      startPoint,
+      btnTop,
+      btnLeft,
+      windowWidth,
+      windowHeight,
+      isIpx
+    } = that.data;
+    // 获取结束点
+    let endPoint = e.touches[e.touches.length - 1]
+    // 计算移动距离相差
+    let translateX = endPoint.clientX - startPoint.clientX
+    let translateY = endPoint.clientY - startPoint.clientY
+    // 初始化
+    startPoint = endPoint
+    // 赋值
+    btnTop = btnTop + translateY
+    btnLeft = btnLeft + translateX
+
+    // 临界值判断
+    if (btnLeft + 45 >= windowWidth) {
+      btnLeft = windowWidth - 45;
+    }
+    if (btnLeft <= 0) {
+      btnLeft = 0;
+    }
+    // 根据屏幕匹配临界值
+    let topSpace = 100
+    if (isIpx) {
+      topSpace = 134
+    } else {
+      topSpace = 100
+    }
+    if (btnTop + topSpace >= windowHeight) {
+      btnTop = windowHeight - topSpace
+    }
+    // 顶部tab临界值
+    if (btnTop <= 88) {
+      btnTop = 90
+    }
+    that.setData({
+      btnTop,
+      btnLeft,
+      startPoint
+    })
+  },
+
+  bindBall: function (e) {
+    console.log('单点', e);
+    that.buttonMove(e);
+    that.showOrHide();
+  },
+  showOrHide: function () {
+    if (this.data.isShow) {
+      //缩回动画
+      this.takeback();
+      this.setData({
+        isShow: false
+      })
+    } else {
+      //弹出动画
+      this.popp();
+      this.setData({
+        isShow: true
+      })
+    }
+  },
+
+  //弹出动画
+  popp: function () {
+    let ballList = that.data.ballList;
+    // wx.createSelectorQuery().selectAll('.ball').boundingClientRect(function (rect) {
+    //   console.log(rect)
+    // }).exec()
+
+    //计算菜单旋转出去的坐标
+    function getPoint(Xr, deg) {
+      var x = Math.round(Xr * Math.sin(deg * Math.PI / 180));
+      var y = Math.round(Xr * Math.cos(deg * Math.PI / 180));
+      return {
+        x,
+        y
+      }
+    };
+    for (const key in ballList) {
+      const element = ballList[key];
+      let ballAnimation = wx.createAnimation({
+        duration: 500,
+        timingFunction: 'ease'
+      })
+      // parseFloat
+      element.itemAnimation = ballAnimation.translate(getPoint(50, -key*60).x, getPoint(-50, key*60).y).rotate(720).opacity(1).step();
+    }
+    that.setData({
+      ballList: ballList
+    })
+  },
+
+  //收回动画
+  takeback: function () {
+    let ballList = that.data.ballList;
+    for (const key in ballList) {
+      const element = ballList[key];
+      let ballAnimation = wx.createAnimation({
+        duration: 500,
+        timingFunction: 'ease'
+      })
+      element.itemAnimation = ballAnimation.translate(0,0).rotate(360).opacity(0).step();
+      console.log(element);
+    }
+    console.log(ballList);
+    that.setData({
+      ballList: ballList
+    })
+  },
+
+  //解决滚动穿透问题
+  myCatchTouch: function () {
+    return
+  },
+
+
+  buttonEnd: function (e) {
+
+  },
+
+
 
   // 订单列表
   orderListFn: (pageIndex, searchDate, orderStatus) => {

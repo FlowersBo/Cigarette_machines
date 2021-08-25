@@ -16,6 +16,11 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
+    btnTop: 0,
+    btnLeft: 0,
+    windowHeight: '',
+    windowWidth: ''
+
   },
 
   /**
@@ -42,6 +47,7 @@ Page({
     //   console.log(e)
     // })
   },
+
 
   bindLogOut: function () {
     this.mask.util('open');
@@ -146,7 +152,7 @@ Page({
       })
     }, 1500)
   },
-  
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
