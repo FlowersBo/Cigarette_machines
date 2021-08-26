@@ -53,7 +53,8 @@ Page({
       name: 4
     }, {
       name: 5
-    }]
+    }],
+    isBindBall: false
   },
 
 
@@ -98,9 +99,7 @@ Page({
 
 
   claendarHidden: () => {
-    that.setData({
-      isShow: true
-    })
+
   },
 
 
@@ -117,7 +116,7 @@ Page({
     let pageIndex = '1';
     that.orderListFn(pageIndex);
 
-    // 获取适配参数
+    // 获取配置参数
     wx.getSystemInfo({
       success(res) {
         let isIpx = res;
@@ -126,13 +125,23 @@ Page({
           isIpx
         })
         // 获取屏幕的大小
-        let windowHeight = wx.getSystemInfoSync().windowHeight
-        let windowWidth = wx.getSystemInfoSync().windowWidth
-        let btnTop = isIpx ? windowHeight - 134 : windowHeight - 100
+        let windowHeight = wx.getSystemInfoSync().windowHeight;
+        let windowWidth = wx.getSystemInfoSync().windowWidth;
+        console.log(windowWidth, windowHeight);
+
+        wx.createSelectorQuery().selectAll('.custom').boundingClientRect(function (rect) {
+          console.log(rect);
+          let customHeight = rect[0].height;
+          that.setData({
+            customHeight
+          })
+        }).exec()
+        let btnTop = isIpx ? windowHeight - 134 : windowHeight - 100;
+        let btnLeft = windowWidth - 45;
         that.setData({
           windowHeight,
           windowWidth,
-          btnLeft: windowWidth - 45,
+          btnLeft,
           btnTop
         })
       }
@@ -142,7 +151,7 @@ Page({
 
   // 悬浮球开始移动
   buttonStart(e) {
-    console.log('获取起始点', e)
+    // console.log('获取起始点', e)
     this.setData({
       startPoint: e.touches[0]
     })
@@ -158,11 +167,20 @@ Page({
       windowHeight,
       isIpx
     } = that.data;
+    // console.log('悬浮球元素', e);
     // 获取结束点
     let endPoint = e.touches[e.touches.length - 1]
     // 计算移动距离相差
-    let translateX = endPoint.clientX - startPoint.clientX
-    let translateY = endPoint.clientY - startPoint.clientY
+    let translateX = endPoint.clientX - startPoint.clientX;
+    let translateY = endPoint.clientY - startPoint.clientY;
+    if (that.data.isBindBall && (endPoint.clientX != startPoint.clientX || endPoint.clientY != startPoint.clientY)) {
+      that.takeback();
+      that.setData({
+        isBindBall: false,
+        isShow: false
+      })
+    }
+    // console.log(that.data.isBindBall);
     // 初始化
     startPoint = endPoint
     // 赋值
@@ -176,6 +194,13 @@ Page({
     if (btnLeft <= 0) {
       btnLeft = 0;
     }
+    if (that.data.isBindBall && btnLeft <= 45) {
+      btnLeft = 50
+    }
+    if (that.data.isBindBall && btnLeft + 95 >= windowWidth) {
+      btnLeft = windowWidth - 95
+    }
+
     // 根据屏幕匹配临界值
     let topSpace = 100
     if (isIpx) {
@@ -187,9 +212,16 @@ Page({
       btnTop = windowHeight - topSpace
     }
     // 顶部tab临界值
-    if (btnTop <= 88) {
-      btnTop = 90
+    if (btnTop <= that.data.customHeight + 4) {
+      btnTop = that.data.customHeight + 4
     }
+    if (that.data.isBindBall && btnTop <= that.data.customHeight + 50) {
+      btnTop = that.data.customHeight + 54
+    }
+    if (that.data.isBindBall && btnTop >= windowHeight - 134) {
+      btnTop = windowHeight - 165
+    }
+    // console.log(btnLeft, btnTop);
     that.setData({
       btnTop,
       btnLeft,
@@ -197,11 +229,15 @@ Page({
     })
   },
 
+
+  // 点击弹出选项
   bindBall: function (e) {
-    console.log('单点', e);
-    that.buttonMove(e);
     that.showOrHide();
+    that.buttonMove(e);
   },
+
+
+  // 动画
   showOrHide: function () {
     if (this.data.isShow) {
       //缩回动画
@@ -221,9 +257,6 @@ Page({
   //弹出动画
   popp: function () {
     let ballList = that.data.ballList;
-    // wx.createSelectorQuery().selectAll('.ball').boundingClientRect(function (rect) {
-    //   console.log(rect)
-    // }).exec()
 
     //计算菜单旋转出去的坐标
     function getPoint(Xr, deg) {
@@ -241,10 +274,11 @@ Page({
         timingFunction: 'ease'
       })
       // parseFloat
-      element.itemAnimation = ballAnimation.translate(getPoint(50, -key*60).x, getPoint(-50, key*60).y).rotate(720).opacity(1).step();
+      element.itemAnimation = ballAnimation.translate(getPoint(50, -key * 60).x, getPoint(-50, key * 60).y).rotate(720).opacity(1).step();
     }
     that.setData({
-      ballList: ballList
+      ballList: ballList,
+      isBindBall: true
     })
   },
 
@@ -257,12 +291,11 @@ Page({
         duration: 500,
         timingFunction: 'ease'
       })
-      element.itemAnimation = ballAnimation.translate(0,0).rotate(360).opacity(0).step();
-      console.log(element);
+      element.itemAnimation = ballAnimation.translate(0, 0).rotate(360).opacity(0).step();
     }
-    console.log(ballList);
     that.setData({
-      ballList: ballList
+      ballList: ballList,
+      isBindBall: false
     })
   },
 
