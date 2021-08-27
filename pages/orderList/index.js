@@ -218,8 +218,8 @@ Page({
     if (that.data.isBindBall && btnTop <= that.data.customHeight + 50) {
       btnTop = that.data.customHeight + 54
     }
-    if (that.data.isBindBall && btnTop >= windowHeight - 134) {
-      btnTop = windowHeight - 165
+    if (that.data.isBindBall && btnTop >= windowHeight - (topSpace + 30)) {
+      btnTop = windowHeight - 184
     }
     // console.log(btnLeft, btnTop);
     that.setData({
@@ -271,10 +271,11 @@ Page({
       const element = ballList[key];
       let ballAnimation = wx.createAnimation({
         duration: 500,
-        timingFunction: 'ease'
+        timingFunction: 'ease',
+        // transformOrigin: '50% 50% 0' //缩放倍数
       })
       // parseFloat
-      element.itemAnimation = ballAnimation.translate(getPoint(50, -key * 60).x, getPoint(-50, key * 60).y).rotate(720).opacity(1).step();
+      element.itemAnimation = ballAnimation.translate(getPoint(50, -key * 60).x, getPoint(-50, key * 60).y).rotate(720).opacity(1).step({delay: 50 * key});
     }
     that.setData({
       ballList: ballList,
@@ -282,16 +283,15 @@ Page({
     })
   },
 
-  //收回动画
+  //缩回动画
   takeback: function () {
     let ballList = that.data.ballList;
     for (const key in ballList) {
       const element = ballList[key];
       let ballAnimation = wx.createAnimation({
-        duration: 500,
         timingFunction: 'ease'
       })
-      element.itemAnimation = ballAnimation.translate(0, 0).rotate(360).opacity(0).step();
+      element.itemAnimation = ballAnimation.translate(0, 0).rotate(360).opacity(0).step({duration: 300});
     }
     that.setData({
       ballList: ballList,

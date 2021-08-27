@@ -9,7 +9,7 @@ Page({
     pageSize: '60',
     deviceId: '',
     selectGoodsDeviceId: false, //选择返回
-    goodsNavTitle: ['货道', '商品名称', '设备库存','门店库存'],
+    goodsNavTitle: ['货道', '商品名称', '设备库存', '门店库存'],
     goodsRoadList: [],
     isFlag: false,
     pull: {
@@ -22,6 +22,28 @@ Page({
       loading: '../../resource/img/pull_refresh.gif',
       pullText: ''
     },
+    ballList: [{
+      name: 0
+    }, {
+      name: 1
+    }, {
+      name: 2
+    }, {
+      name: 3
+    }, {
+      name: 4
+    }, {
+      name: 5
+    }],
+  },
+
+  bindBallFn(e){
+    console.log('当前选项',e.detail);
+    wx.showToast({
+      title: `当前选项${e.detail}`,
+      icon: 'none',
+      duration: 2000
+    })
   },
 
   //监听滑块
@@ -453,7 +475,7 @@ Page({
 
 
   onShow: function () {
-    if (typeof this.getTabBar === 'function' &&  this.getTabBar()) {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
         selected: 0
       })

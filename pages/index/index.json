@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "ball":"/component/ball/index"
   },
   "onReachBottomDistance": 0,
   "backgroundTextStyle": "dark",

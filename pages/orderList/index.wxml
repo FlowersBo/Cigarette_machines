@@ -115,9 +115,9 @@
   catchtap="bindBall" style="top:{{ btnTop }}px;left:{{ btnLeft }}px">
   <image src='../../assets/img/fangdajing.png'></image>
   <block wx:for="{{ballList}}" wx:key="index">
-    <view class="ball" animation="{{item.itemAnimation}}" data-index="{{index}}">
+    <!-- <view class="ball" animation="{{item.itemAnimation}}" data-index="{{index}}">
       {{item.name}}
-    </view>
+    </view> -->
   </block>
 </view>
 
