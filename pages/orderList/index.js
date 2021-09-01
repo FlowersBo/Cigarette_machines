@@ -42,21 +42,35 @@ Page({
     selectarray: '请选择状态',
     orderStatus: '',
     ballList: [{
-      name: 0
+      name: 'C柜'
     }, {
-      name: 1
-    }, {
+      name: '蒸包'
+    }, 
+    {
       name: 2
-    }, {
+    }, 
+    {
       name: 3
-    }, {
+    }, 
+    {
       name: 4
-    }, {
+    }, 
+    {
       name: 5
-    }],
+    }
+  ],
     isBindBall: false
   },
 
+  //组件监听选项
+  bindBallFn(e) {
+    console.log('当前选项', e.detail);
+    wx.showToast({
+      title: `当前选项${e.detail}`,
+      icon: 'none',
+      duration: 2000
+    })
+  },
 
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value);
@@ -115,37 +129,6 @@ Page({
     })
     let pageIndex = '1';
     that.orderListFn(pageIndex);
-
-    // 获取配置参数
-    wx.getSystemInfo({
-      success(res) {
-        let isIpx = res;
-        console.log('配置参数', isIpx);
-        that.setData({
-          isIpx
-        })
-        // 获取屏幕的大小
-        let windowHeight = wx.getSystemInfoSync().windowHeight;
-        let windowWidth = wx.getSystemInfoSync().windowWidth;
-        console.log(windowWidth, windowHeight);
-
-        wx.createSelectorQuery().selectAll('.custom').boundingClientRect(function (rect) {
-          console.log(rect);
-          let customHeight = rect[0].height;
-          that.setData({
-            customHeight
-          })
-        }).exec()
-        let btnTop = isIpx ? windowHeight - 134 : windowHeight - 100;
-        let btnLeft = windowWidth - 45;
-        that.setData({
-          windowHeight,
-          windowWidth,
-          btnLeft,
-          btnTop
-        })
-      }
-    })
   },
 
 
@@ -257,7 +240,6 @@ Page({
   //弹出动画
   popp: function () {
     let ballList = that.data.ballList;
-
     //计算菜单旋转出去的坐标
     function getPoint(Xr, deg) {
       var x = Math.round(Xr * Math.sin(deg * Math.PI / 180));
@@ -272,10 +254,13 @@ Page({
       let ballAnimation = wx.createAnimation({
         duration: 500,
         timingFunction: 'ease',
-        // transformOrigin: '50% 50% 0' //缩放倍数
+        // transformOrigin: '50% 50% 0' //拉伸倍数
       })
+      console.log(ballList.length);
       // parseFloat
-      element.itemAnimation = ballAnimation.translate(getPoint(50, -key * 60).x, getPoint(-50, key * 60).y).rotate(720).opacity(1).step({delay: 50 * key});
+      element.itemAnimation = ballAnimation.translate(getPoint(50, -key * (360/ballList.length)).x, getPoint(-50, key * (360/ballList.length)).y).rotate(720).opacity(1).step({
+        delay: 50 * key
+      });
     }
     that.setData({
       ballList: ballList,
@@ -291,7 +276,9 @@ Page({
       let ballAnimation = wx.createAnimation({
         timingFunction: 'ease'
       })
-      element.itemAnimation = ballAnimation.translate(0, 0).rotate(360).opacity(0).step({duration: 300});
+      element.itemAnimation = ballAnimation.translate(0, 0).rotate(360).opacity(0).step({
+        duration: 300
+      });
     }
     that.setData({
       ballList: ballList,
@@ -512,7 +499,37 @@ Page({
       that.setData({
         customHeight: customHeight
       })
-    }).exec()
+    }).exec();
+    // 获取配置参数
+    wx.getSystemInfo({
+      success(res) {
+        let isIpx = res;
+        console.log('配置参数', isIpx);
+        that.setData({
+          isIpx
+        })
+        // 获取屏幕的大小
+        let windowHeight = wx.getSystemInfoSync().windowHeight;
+        let windowWidth = wx.getSystemInfoSync().windowWidth;
+        console.log(windowWidth, windowHeight);
+
+        wx.createSelectorQuery().selectAll('.custom').boundingClientRect(function (rect) {
+          console.log(rect);
+          let customHeight = rect[0].height;
+          that.setData({
+            customHeight
+          })
+        }).exec()
+        let btnTop = isIpx ? windowHeight - 134 : windowHeight - 100;
+        let btnLeft = windowWidth - 45;
+        that.setData({
+          windowHeight,
+          windowWidth,
+          btnLeft,
+          btnTop
+        })
+      }
+    })
   },
 
   /**

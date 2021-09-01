@@ -35,6 +35,50 @@ Page({
     isFlag: false,
   },
 
+  //组件监听选项
+  bindBallFn(e) {
+    console.log('当前选项', e.detail);
+    wx.showToast({
+      title: `当前选项${e.detail}`,
+      icon: 'none',
+      duration: 2000
+    })
+  },
+
+
+  // 点击显示
+  merchantOff(e) {
+    console.log(e);
+    let index = e.currentTarget.dataset.index;
+    let pointsData = that.data.pointsData;
+    for (const key in pointsData) {
+      if (Object.hasOwnProperty.call(pointsData, key)) {
+        const element = pointsData[key];
+        if (key == index) {
+          element.isHidden = !element.isHidden
+        }else{
+          element.isHidden = false
+        }
+      }
+      that.setData({
+        pointsData: pointsData
+      })
+    }
+  },
+
+  merachartOn() {
+    let pointsData = that.data.pointsData;
+    for (const key in pointsData) {
+      if (Object.hasOwnProperty.call(pointsData, key)) {
+        const element = pointsData[key];
+        element.isHidden = false
+      }
+    }
+    that.setData({
+      pointsData: pointsData
+    })
+  },
+
   onLoad: function () {
     that = this;
     let dateRange = that.data.dateRange;
@@ -200,6 +244,7 @@ Page({
           console.log('列表', resp);
           pointsData = pointsData.concat(resp.data.data.list); //列表
           for (const key in pointsData) {
+            pointsData[key].isHidden = false;
             pointsData[key].rentalRate = parseFloat(pointsData[key].rentalRate).toFixed(2)
           }
           if (pointsData.length <= 0) {
@@ -310,6 +355,8 @@ Page({
         reportDetail.titleUrls[index] = '../../assets/img/arrow-h.png';
         this.setData({
           isSaleAmountSort: true,
+          isSaleCountSort: false,
+          isMarketSort: false,
           sortBy: 'asc',
           sort: 'orderAmount',
           marketSort: '',
@@ -319,6 +366,8 @@ Page({
         reportDetail.titleUrls[index] = '../../assets/img/arrow-l.png';
         this.setData({
           isSaleAmountSort: false,
+          isSaleCountSort: false,
+          isMarketSort: false,
           sortBy: 'desc',
           sort: 'orderAmount',
           marketSort: '',
@@ -332,6 +381,8 @@ Page({
         reportDetail.titleUrls[index] = '../../assets/img/arrow-h.png';
         this.setData({
           isSaleCountSort: true,
+          isSaleAmountSort: false,
+          isMarketSort: false,
           sortBy: 'asc',
           sort: 'orderCount',
           reportDetail: reportDetail
@@ -340,6 +391,8 @@ Page({
         reportDetail.titleUrls[index] = '../../assets/img/arrow-l.png';
         this.setData({
           isSaleCountSort: false,
+          isSaleAmountSort: false,
+          isMarketSort: false,
           sortBy: 'desc',
           sort: 'orderCount',
           reportDetail: reportDetail
@@ -352,6 +405,8 @@ Page({
         reportDetail.titleUrls[index] = '../../assets/img/arrow-h.png';
         this.setData({
           isMarketSort: true,
+          isSaleAmountSort: false,
+          isSaleCountSort: false,
           sortBy: 'asc',
           sort: 'ProductCount',
           reportDetail: reportDetail
@@ -360,6 +415,8 @@ Page({
         reportDetail.titleUrls[index] = '../../assets/img/arrow-l.png';
         this.setData({
           isMarketSort: false,
+          isSaleAmountSort: false,
+          isSaleCountSort: false,
           sortBy: 'desc',
           sort: 'ProductCount',
           reportDetail: reportDetail

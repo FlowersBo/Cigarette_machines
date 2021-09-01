@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    
+    "ball":"/component/ball/index"
   }
 }

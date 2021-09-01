@@ -109,15 +109,16 @@
   </view>
   <noData isFlag="{{isFlag}}"></noData>
 </scroll-y>
+<!-- <ball ballList="{{ballList}}" bind:bindBallFn="bindBallFn"/>   -->
 <!-- 悬浮球 -->
 <!-- catchtap='refresh' -->
 <view class='refresh' catchtouchmove="buttonMove" bindtouchstart="buttonStart" bindtouchend="buttonEnd"
   catchtap="bindBall" style="top:{{ btnTop }}px;left:{{ btnLeft }}px">
   <image src='../../assets/img/fangdajing.png'></image>
   <block wx:for="{{ballList}}" wx:key="index">
-    <!-- <view class="ball" animation="{{item.itemAnimation}}" data-index="{{index}}">
+    <view class="ball" animation="{{item.itemAnimation}}" data-index="{{index}}">
       {{item.name}}
-    </view> -->
+    </view>
   </block>
 </view>
 

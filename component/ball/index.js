@@ -212,7 +212,7 @@ Component({
           // transformOrigin: '50% 50% 0' //缩放倍数
         })
         // parseFloat
-        element.itemAnimation = ballAnimation.translate(getPoint(50, -key * 60).x, getPoint(-50, key * 60).y).rotate(720).opacity(1).step({
+        element.itemAnimation = ballAnimation.translate(getPoint(50, -key * (360/ballList.length)).x, getPoint(-50, key * (360/ballList.length)).y).rotate(720).opacity(1).step({
           delay: 50 * key
         });
       }

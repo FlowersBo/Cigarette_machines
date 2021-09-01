@@ -3,10 +3,10 @@
   <view slot="content">报表</view>
 </cu-custom>
 <!--index.wxml-->
-<view class="nav_title">
+<view class="nav_title" bindtap="merachartOn">
   <view class="nav_tab">
-    <view class="{{dateRange==index?'hidden':'show'}}" wx:for="{{dateRangeText}}" wx:key="index"
-      data-index="{{index}}" bindtap="selectedDateRange">
+    <view class="{{dateRange==index?'hidden':'show'}}" wx:for="{{dateRangeText}}" wx:key="index" data-index="{{index}}"
+      bindtap="selectedDateRange">
       {{item}}
     </view>
   </view>
@@ -42,7 +42,13 @@
     <block wx:for="{{pointsData}}" wx:key="list" wx:for-item="item">
       <view class="list_item {{index%2==0?'bac_a':''}}">
         <view class="info box">
-          <view class="title flex1 ">{{item.pointName?item.pointName:item.pointAddress}}</view>
+          <view wx:if="{{item.isHidden}}" class="merchant-shop">
+            <view class="bubbleWrap">
+              {{item.pointName?item.pointName:item.pointAddress}}
+              <view class="bubble"></view>
+            </view>
+          </view>
+          <view class="title flex1 merchant" data-index="{{index}}" catchtap="merchantOff">{{item.pointName?item.pointName:item.pointAddress}}</view>
           <view class="price flex1 " style="color:#d81e06">￥{{item.orderAmount}}</view>
           <view class="num flex1 ">{{item.orderCount}}</view>
           <view class="report_details flex1 ">{{item.ProductCount}}</view>
@@ -58,3 +64,4 @@
     <view class="fs24 pt20 f-color-666 z-index-1">{{push.pullText}}</view>
   </view>
 </view>
+<!-- <ball ballList="{{ballList}}" bind:bindBallFn="bindBallFn"/>   -->

@@ -1,5 +1,5 @@
-const ApiRootUrl = 'https://w3.morninggo.cn/'; //测试
-// const ApiRootUrl = 'https://api.morninggo.cn/';
+// const ApiRootUrl = 'https://w3.morninggo.cn/'; //测试
+const ApiRootUrl = 'https://api.morninggo.cn/';
 // const ApiRootUrl = 'http://192.168.126.248:8080/app-http/';
 module.exports = {
     RefreshAuth: ApiRootUrl + 'tobaccos/user/v2/refresh_auth', //刷新授权
@@ -24,8 +24,7 @@ module.exports = {
 
     ProductPrice: ApiRootUrl + 'tobaccos/order/checkedProductPrice', //退款选择后计算金额
     WxRefund: ApiRootUrl + 'tobaccos/order/wx_refund', //退款
-    ManualShipment: ApiRootUrl + 'tobaccos/rder/manual_shipment', //手动退货
-
+    ManualShipment: ApiRootUrl + 'tobaccos/order/manual_shipment', //手动退货
     QuantityTotal: ApiRootUrl + 'tobaccos/report/history/total', //时间段销售总额
     Historylist: ApiRootUrl + 'tobaccos/report/history/list', //时间段点位销售列表
 
