@@ -1,10 +1,11 @@
 <!--component/ball/index.wxml-->
 <view class='refresh' catchtouchmove="buttonMove" bindtouchstart="buttonStart" bindtouchend="buttonEnd"
   catchtap="bindBall" style="top:{{ btnTop }}px;left:{{ btnLeft }}px">
-  <view class="imgWrap">
-    <image class="bindImg" src='../../assets/img/fangdajing.png'></image>
+  <view class="imgWrap" animation="{{animationData}}">
+  <!-- <view class="animationWrap" animation="{{animationData}}"></view> -->
+    <!-- <image class="bindImg" src='../../assets/img/fangdajing.png'></image> -->
   </view>
-  <block class="ball" wx:for="{{ballList}}" wx:key="index">
+  <block wx:for="{{ballList}}" wx:key="index">
     <view class="ball" animation="{{item.itemAnimation}}" bindtap="callSomeFun" data-index="{{index}}">
       {{item.name}}
     </view>

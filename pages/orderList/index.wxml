@@ -95,7 +95,7 @@
         <view class="shopWrap">
           <view class="shop-img">
             <block wx:for="{{item.detailsList}}" wx:for-item='detail' wx:key="index" wx:if="{{index < 3}}">
-              <image lazy-load src="{{detail.url}}"></image>
+              <image mode="aspectFit" lazy-load src="{{detail.url}}"></image>
             </block>
           </view>
           <view class="omit" wx:if="{{item.url&&item.detailsList.length>3}}">...</view>
@@ -109,10 +109,9 @@
   </view>
   <noData isFlag="{{isFlag}}"></noData>
 </scroll-y>
-<!-- <ball ballList="{{ballList}}" bind:bindBallFn="bindBallFn"/>   -->
+<ball ballList="{{ballList}}" bind:bindBallFn="bindBallFn"/>  
 <!-- 悬浮球 -->
-<!-- catchtap='refresh' -->
-<view class='refresh' catchtouchmove="buttonMove" bindtouchstart="buttonStart" bindtouchend="buttonEnd"
+<!-- <view class='refresh' catchtouchmove="buttonMove" bindtouchstart="buttonStart" bindtouchend="buttonEnd"
   catchtap="bindBall" style="top:{{ btnTop }}px;left:{{ btnLeft }}px">
   <image src='../../assets/img/fangdajing.png'></image>
   <block wx:for="{{ballList}}" wx:key="index">
@@ -120,7 +119,7 @@
       {{item.name}}
     </view>
   </block>
-</view>
+</view> -->
 
 <!-- <view class="{{isFlag?'iconWrap':'iconNone'}}">
   <icon class="iconfont icon iconzanwushuju"></icon>

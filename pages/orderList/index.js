@@ -42,34 +42,44 @@ Page({
     selectarray: '请选择状态',
     orderStatus: '',
     ballList: [{
-      name: 'C柜'
-    }, {
-      name: '蒸包'
-    }, 
-    {
-      name: 2
-    }, 
-    {
-      name: 3
-    }, 
-    {
-      name: 4
-    }, 
-    {
-      name: 5
-    }
-  ],
+        name: 'C柜'
+      }, {
+        name: '蒸包'
+      },
+      // {
+      //   name: 2
+      // }, 
+      // {
+      //   name: 3
+      // }, 
+      // {
+      //   name: 4
+      // }, 
+      // {
+      //   name: 5
+      // }
+    ],
     isBindBall: false
   },
 
   //组件监听选项
   bindBallFn(e) {
     console.log('当前选项', e.detail);
-    wx.showToast({
-      title: `当前选项${e.detail}`,
-      icon: 'none',
-      duration: 2000
-    })
+    let ballList = that.data.ballList;
+    if (ballList) {
+      for (const key in ballList) {
+        if (Object.hasOwnProperty.call(ballList, key)) {
+          const element = ballList[key];
+          if (key == e.detail) {
+            wx.showToast({
+              title: `当前选项：${element.name}`,
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        }
+      }
+    }
   },
 
   bindPickerChange: function (e) {
@@ -256,10 +266,9 @@ Page({
         timingFunction: 'ease',
         // transformOrigin: '50% 50% 0' //拉伸倍数
       })
-      console.log(ballList.length);
       // parseFloat
-      element.itemAnimation = ballAnimation.translate(getPoint(50, -key * (360/ballList.length)).x, getPoint(-50, key * (360/ballList.length)).y).rotate(720).opacity(1).step({
-        delay: 50 * key
+      element.itemAnimation = ballAnimation.translate(getPoint(50, -key * (360 / ballList.length)).x, getPoint(-50, key * (360 / ballList.length)).y).rotate(720).opacity(1).step({
+        delay: 60 * key
       });
     }
     that.setData({
@@ -291,12 +300,9 @@ Page({
     return
   },
 
-
   buttonEnd: function (e) {
-
+    console.log('手指离开');
   },
-
-
 
   // 订单列表
   orderListFn: (pageIndex, searchDate, orderStatus) => {

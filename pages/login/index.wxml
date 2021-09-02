@@ -1,6 +1,6 @@
 <!--pages/login/index.wxml-->
 <cu-custom bgColor="bg-login-color" class="custom">
-  <view slot="content">智能售烟柜</view>
+  <view slot="content">一根田店员端</view>
 </cu-custom>
 <view class="loginWrap">
   <view class="login_head_img">

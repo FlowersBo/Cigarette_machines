@@ -276,6 +276,14 @@ ec-canvas {
   text-align: center;
 }
 
+.tabTit-item:first-child{
+  flex: 2;
+}
+
+.flex1:nth-child(2){
+  flex: 1.2;
+}
+
 .merchant {
   flex: 2;
 }
@@ -299,6 +307,7 @@ ec-canvas {
   text-align: center;
   background-color: #fff;
 }
+
 
 .list .list_item .title,
 .price {

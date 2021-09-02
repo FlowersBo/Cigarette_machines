@@ -29,10 +29,13 @@
       <view class="particulars">
         <view class="particulars-item" wx:for="{{orderDetail.tbOrderDetailsList}}" wx:key="index">
           <view class="goods-item">
-            <image class="goods-img" src="{{item.url}}"></image>
+            <image class="goods-img" mode="aspectFit" src="{{item.url}}"></image>
             <view class="goodss">
               <image class="label" src="../../../resource/img/label.png"></image>
-              <view class="goodsName">{{item.productName}}</view>
+              <view class="goodsNameWrap">
+                <view class="goodsName">{{item.productName}}</view>
+                <view class="goodsName">NO：{{item.productNo}}</view>
+              </view>
             </view>
           </view>
           <view class="goods-item">x{{item.quantity}}</view>
@@ -48,7 +51,8 @@
         </view>
         <view class="order-item">
           <image src="../../../resource/img/payment.png"></image>
-          <view class="orderName">支付方式：{{tbOrderInfo.payType==='VSP501'?'微信':(tbOrderInfo.payType==='VSP511'?'支付宝':'其他')}}</view>
+          <view class="orderName">
+            支付方式：{{tbOrderInfo.payType==='VSP501'?'微信':(tbOrderInfo.payType==='VSP511'?'支付宝':'其他')}}</view>
         </view>
       </view>
     </view>

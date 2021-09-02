@@ -67,7 +67,7 @@ Component({
             })
           }).exec()
           let btnTop = isIpx ? windowHeight - 134 : windowHeight - 100;
-          let btnLeft = windowWidth - 45;
+          let btnLeft = windowWidth - 50;
           that.setData({
             windowHeight,
             windowWidth,
@@ -83,11 +83,20 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    // 悬浮球开始移动
+    // 悬浮球开始
     buttonStart(e) {
       // console.log('获取起始点', e)
+      let animation = wx.createAnimation({
+        duration: 200,
+        timingFunction: 'ease',
+        delay: 200
+      })
+      animation
+        .opacity(1)
+        .step()
       this.setData({
-        startPoint: e.touches[0]
+        startPoint: e.touches[0],
+        animationData: animation.export()
       })
     },
 
@@ -102,6 +111,18 @@ Component({
         windowHeight,
         isIpx
       } = that.data;
+      let animation = wx.createAnimation({
+        duration: 200,
+        timingFunction: 'ease',
+        delay: 200
+      })
+      animation
+        .opacity(1)
+        .step()
+      this.setData({
+        animationData: animation.export()
+      })
+
       // console.log('悬浮球元素', e);
       // 获取结束点
       let endPoint = e.touches[e.touches.length - 1]
@@ -123,17 +144,17 @@ Component({
       btnLeft = btnLeft + translateX
 
       // 临界值判断
-      if (btnLeft + 45 >= windowWidth) {
-        btnLeft = windowWidth - 45;
+      if (btnLeft + 50 >= windowWidth) {
+        btnLeft = windowWidth - 50;
       }
       if (btnLeft <= 0) {
         btnLeft = 0;
       }
-      if (that.data.isBindBall && btnLeft <= 45) {
+      if (that.data.isBindBall && btnLeft <= 50) {
         btnLeft = 50
       }
-      if (that.data.isBindBall && btnLeft + 95 >= windowWidth) {
-        btnLeft = windowWidth - 95
+      if (that.data.isBindBall && btnLeft + 100 >= windowWidth) {
+        btnLeft = windowWidth - 100
       }
 
       // 根据屏幕匹配临界值
@@ -153,8 +174,8 @@ Component({
       if (that.data.isBindBall && btnTop <= that.data.customHeight + 50) {
         btnTop = that.data.customHeight + 54
       }
-      if (that.data.isBindBall && btnTop >= windowHeight - (topSpace + 30)) {
-        btnTop = windowHeight - 184
+      if (that.data.isBindBall && btnTop >= windowHeight - (topSpace + 40)) {
+        btnTop = windowHeight - 188
       }
       // console.log(btnLeft, btnTop);
       that.setData({
@@ -212,7 +233,7 @@ Component({
           // transformOrigin: '50% 50% 0' //缩放倍数
         })
         // parseFloat
-        element.itemAnimation = ballAnimation.translate(getPoint(50, -key * (360/ballList.length)).x, getPoint(-50, key * (360/ballList.length)).y).rotate(720).opacity(1).step({
+        element.itemAnimation = ballAnimation.translate(getPoint(50, -key * (360 / ballList.length)).x, getPoint(-50, key * (360 / ballList.length)).y).rotate(720).opacity(1).step({
           delay: 50 * key
         });
       }
@@ -231,9 +252,7 @@ Component({
         let ballAnimation = wx.createAnimation({
           timingFunction: 'ease'
         })
-        element.itemAnimation = ballAnimation.translate(0, 0).rotate(360).opacity(0).step({
-          duration: 300
-        });
+        element.itemAnimation = ballAnimation.translate(0, 0).rotate(360).opacity(0).step();
       }
       that.setData({
         ballList: ballList,
@@ -248,7 +267,18 @@ Component({
 
 
     buttonEnd: function (e) {
+      let animation = wx.createAnimation({
+        duration: 2000,
+        timingFunction: 'ease',
+        delay: 1500
+      })
+      animation
+        .opacity(0.5)
+        .step()
 
+      this.setData({
+        animationData: animation.export()
+      })
     },
 
     callSomeFun(e) {

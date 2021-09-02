@@ -31,7 +31,7 @@
     </view>
   </view>
   <view class="tabTit box {{floorstatus?'tabTit_fixed':''}}">
-    <view class="flex1" wx:for="{{reportDetail.titles}}" wx:key="type" data-index="{{index}}" bindtap="bindPointSort">
+    <view class="flex1 tabTit-item" wx:for="{{reportDetail.titles}}" wx:key="type" data-index="{{index}}" bindtap="bindPointSort">
       <label>
         <text>{{item}}</text>
         <image src="{{reportDetail.titleUrls[index]}}" class="coding_flash_image"></image>
@@ -42,12 +42,12 @@
     <block wx:for="{{pointsData}}" wx:key="list" wx:for-item="item">
       <view class="list_item {{index%2==0?'bac_a':''}}">
         <view class="info box">
-          <view wx:if="{{item.isHidden}}" class="merchant-shop">
+          <!-- <view wx:if="{{item.isHidden}}" class="merchant-shop">
             <view class="bubbleWrap">
               {{item.pointName?item.pointName:item.pointAddress}}
               <view class="bubble"></view>
             </view>
-          </view>
+          </view> -->
           <view class="title flex1 merchant" data-index="{{index}}" catchtap="merchantOff">{{item.pointName?item.pointName:item.pointAddress}}</view>
           <view class="price flex1 " style="color:#d81e06">￥{{item.orderAmount}}</view>
           <view class="num flex1 ">{{item.orderCount}}</view>

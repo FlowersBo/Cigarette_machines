@@ -51,6 +51,13 @@
   height: 38rpx;
 }
 
+.equipment-item-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+}
+
 .goodsDetail {
   width: 100%;
   background-color: #fff;
@@ -83,8 +90,9 @@
   width: 100%;
   display: flex;
   align-items: center;
-  height: 150rpx;
   border-bottom: 1rpx solid #ddd;
+  box-sizing: border-box;
+  padding: 20rpx 0;
 }
 
 .particulars-item:last-child {
@@ -96,10 +104,10 @@
   display: flex;
   align-items: center;
   flex: 1;
-  white-space: nowrap;
+  /* white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  word-break: break-all;
+  word-break: break-all; */
   justify-content: center;
 }
 
@@ -108,10 +116,9 @@
 }
 
 .goods-item .goods-img {
-  width: 120rpx;
-  height: 120rpx;
+  width: 100rpx;
+  height: 144rpx;
   border-radius: 8rpx;
-  margin-right: 14rpx;
 }
 
 .goodss {
@@ -121,19 +128,21 @@
   align-items: center;
 }
 
+
 .goodsName {
-  flex: 1;
-  min-width: 0;
+  width: 360rpx;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   word-break: break-all;
+  box-sizing: border-box;
+  padding: 4rpx 0;
 }
 
 .label {
-  width: 28rpx;
-  height: 34rpx;
-  margin-right: 10rpx;
+  width: 32rpx;
+  height: 44rpx;
+  margin: 0 16rpx;
 }
 
 .orderWrap {
