@@ -86,16 +86,22 @@ Component({
     // 悬浮球开始
     buttonStart(e) {
       // console.log('获取起始点', e)
+      this.setData({
+        startPoint: e.touches[0]
+      })
+      this.imgWrapAnim(1);
+    },
+
+    imgWrapAnim(opac) {
       let animation = wx.createAnimation({
-        duration: 200,
+        duration: 1000,
         timingFunction: 'ease',
-        delay: 200
+        delay: 100
       })
       animation
-        .opacity(1)
+        .opacity(opac)
         .step()
       this.setData({
-        startPoint: e.touches[0],
         animationData: animation.export()
       })
     },
@@ -230,7 +236,7 @@ Component({
         let ballAnimation = wx.createAnimation({
           duration: 500,
           timingFunction: 'ease',
-          // transformOrigin: '50% 50% 0' //缩放倍数
+          // transformOrigin: '50% 50% 0' //伸缩比
         })
         // parseFloat
         element.itemAnimation = ballAnimation.translate(getPoint(50, -key * (360 / ballList.length)).x, getPoint(-50, key * (360 / ballList.length)).y).rotate(720).opacity(1).step({
@@ -267,18 +273,10 @@ Component({
 
 
     buttonEnd: function (e) {
-      let animation = wx.createAnimation({
-        duration: 2000,
-        timingFunction: 'ease',
-        delay: 1500
-      })
-      animation
-        .opacity(0.5)
-        .step()
-
-      this.setData({
-        animationData: animation.export()
-      })
+      let that = this;
+      setTimeout(function(){
+        that.imgWrapAnim(.5);
+      },1500);
     },
 
     callSomeFun(e) {

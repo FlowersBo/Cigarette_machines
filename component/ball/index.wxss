@@ -19,7 +19,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-image: radial-gradient(#fff 30%, rgb(161, 161, 161) 40%,rgb(78, 78, 78) 60%, rgb(65, 65, 65) 80%, rgb(65, 65, 65) 100%);
+  background-image: radial-gradient(#fff 20%,rgb(230, 230, 230) 30%,rgb(230, 230, 230) 35%,rgb(160, 160, 160) 40%,rgb(160, 160, 160) 45%, rgb(110, 110, 110) 50%,rgb(110, 110, 110) 55%,rgb(78, 78, 78) 60%, rgb(68, 68, 68) 80%, rgb(65, 65, 65) 100%);
   opacity: .5;
 }
 
@@ -41,7 +41,7 @@
   position: absolute;
   width: 80rpx;
   height: 80rpx;
-  background: rgb(80, 146, 13);
+  background: #FF9900;
   border-radius: 50%;
   color: #fff;
   font-weight: bold;

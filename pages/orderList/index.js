@@ -13,7 +13,7 @@ Page({
   data: {
     orderList: [],
     pageIndex: '1',
-    pageSize: '20',
+    pageSize: '30',
     isFlag: false,
     loading: true,
     pull: {

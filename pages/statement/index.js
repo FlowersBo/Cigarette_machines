@@ -24,7 +24,7 @@ Page({
     },
     dateRange: 0,
     pageIndex: 1,
-    pageSize: 10,
+    pageSize: 30,
     pointDetaillyDate: '', //日期
     isSaleAmountSort: false,
     isSaleCountSort: false,
@@ -32,7 +32,13 @@ Page({
     pointTotal: 0,
     serchContent: '',
     pointsData: [], //列表
-    isFlag: false,
+    isFlag: false, 
+    ballList: [{
+      name: 'C柜'
+    }, {
+      name: '蒸包'
+    }
+  ],
   },
 
   //组件监听选项

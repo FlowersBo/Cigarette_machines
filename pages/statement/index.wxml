@@ -64,4 +64,4 @@
     <view class="fs24 pt20 f-color-666 z-index-1">{{push.pullText}}</view>
   </view>
 </view>
-<!-- <ball ballList="{{ballList}}" bind:bindBallFn="bindBallFn"/>   -->
+<ball ballList="{{ballList}}" bind:bindBallFn="bindBallFn"/>  
