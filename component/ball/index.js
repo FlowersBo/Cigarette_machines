@@ -8,6 +8,9 @@ Component({
       type: Array,
       value: 0
     },
+    isShow: {
+      type: Boolean
+    }
   },
 
   /**
@@ -18,14 +21,7 @@ Component({
     //   name: 0
     // }, {
     //   name: 1
-    // }, {
-    //   name: 2
-    // }, {
-    //   name: 3
-    // }, {
-    //   name: 4
-    // }, {
-    //   name: 5
+    // }
     // }],
     isBindBall: false
   },
@@ -108,6 +104,7 @@ Component({
 
     // 悬浮球
     buttonMove(e) {
+      // console.log('悬浮球', e);
       let that = this;
       let {
         startPoint,
@@ -274,9 +271,9 @@ Component({
 
     buttonEnd: function (e) {
       let that = this;
-      setTimeout(function(){
+      setTimeout(function () {
         that.imgWrapAnim(.5);
-      },1500);
+      }, 1500);
     },
 
     callSomeFun(e) {

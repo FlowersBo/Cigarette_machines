@@ -185,16 +185,22 @@
 
 .orderBtnWrap {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  /* display: flex; */
+  /* justify-content: space-between; */
   margin: 50rpx 0;
   padding: 0 30rpx;
 }
 
 .orderBtn {
-  width: 260rpx;
+  /* width: 260rpx;
   height: 70rpx;
-  line-height: 70rpx;
+  line-height: 70rpx; 
+  border-radius: 35rpx;*/
+
+  border-radius: 50rpx;
+  width: 600rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   text-align: center;
   background-color: #FF9900;
   box-shadow: 0 0 10px #FF9900;
@@ -202,8 +208,8 @@
   font-size: 32rpx;
   /* letter-spacing: 20rpx; */
   display: block;
-  border-radius: 35rpx;
   /* margin-left: auto; */
+  margin: 0 auto;
 }
 
 .orderBtnWrap :first-child {

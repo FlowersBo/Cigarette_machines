@@ -23,22 +23,14 @@ Page({
       pullText: ''
     },
     ballList: [{
-      name: 0
+      name: 'C柜'
     }, {
-      name: 1
-    }, {
-      name: 2
-    }, {
-      name: 3
-    }, {
-      name: 4
-    }, {
-      name: 5
+      name: '蒸包'
     }],
   },
 
-  bindBallFn(e){
-    console.log('当前选项',e.detail);
+  bindBallFn(e) {
+    console.log('当前选项', e.detail);
     wx.showToast({
       title: `当前选项${e.detail}`,
       icon: 'none',

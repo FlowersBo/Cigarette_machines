@@ -43,10 +43,19 @@
   height: 80rpx;
   background: #FF9900;
   border-radius: 50%;
+  border: 2rpx solid #bba270;
   color: #fff;
   font-weight: bold;
+  font-size: 20rpx;
+  white-space: normal;
+  box-sizing: border-box;
+  padding: 4rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* justify-self: start; */
   text-align: center;
-  line-height: 80rpx;
+  /* line-height: 80rpx; */
   opacity: 0;
   z-index: -1;
 }

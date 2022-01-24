@@ -62,6 +62,10 @@ Page({
     isBindBall: false
   },
 
+  cancelFn(e){ //测试点击其他关闭按钮
+    // this.selectComponent("#ball").showOrHide();
+  },
+
   //组件监听选项
   bindBallFn(e) {
     console.log('当前选项', e.detail);
@@ -71,6 +75,10 @@ Page({
         if (Object.hasOwnProperty.call(ballList, key)) {
           const element = ballList[key];
           if (key == e.detail) {
+            that.setData({
+              isBall: true,
+              isBallName:element.name
+            })
             wx.showToast({
               title: `当前选项：${element.name}`,
               icon: 'none',
@@ -355,6 +363,10 @@ Page({
             const pullText = '- 上拉加载更多 -'
             that.setData({
               'push.pullText': pullText,
+            })
+          }else{
+            that.setData({
+              'push.pullText': '',
             })
           }
           if (orderList.length <= 0) {

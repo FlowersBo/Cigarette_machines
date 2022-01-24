@@ -70,7 +70,7 @@
     </view>
     <view class="orderBtnWrap" wx:if="{{tbOrderInfo.orderStatus=='3'&& role=='clerk'}}">
       <view class="orderBtn" bindtap="manualOperation">手动出货</view>
-      <view class="orderBtn" bindtap="refundFn">退款</view>
+      <!-- <view class="orderBtn" bindtap="refundFn">退款</view> -->
     </view>
     <view class="drawer_screen" bindtap="gotobargainDetailFuns" data-status="1" wx:if="{{showModalStatus}}"></view>
     <!--content-->

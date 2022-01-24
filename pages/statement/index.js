@@ -452,7 +452,7 @@ Page({
     let pageIndex = that.data.pageIndex;
     let pageSize = that.data.pageSize;
     let dateRange = that.data.dateRange;
-    let pointTotal = that.data.pointTotal;
+    let pointTotal = that.data.pointTotal;  
     let serchContent = that.data.serchContent;
     console.log('下一页', pageIndex);
     if (pointsData.length < pointTotal) {

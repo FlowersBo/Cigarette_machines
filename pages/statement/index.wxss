@@ -336,6 +336,7 @@ ec-canvas {
   overflow: hidden;
   font-size: 24rpx;
   color: #666;
+  margin-bottom: 120rpx;
 }
 
 .icon-refresh {
@@ -366,7 +367,6 @@ ec-canvas {
 }
 
 .mask_icon {
-
   font-size: 300rpx;
   color: #FF9900;
 }

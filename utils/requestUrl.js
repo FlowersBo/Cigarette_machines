@@ -201,7 +201,7 @@ function login() {
         wx.showToast({
           title: '请求超时',
           icon: 'none',
-          duration: 1000
+          duration: 2000
         });
       }
     });

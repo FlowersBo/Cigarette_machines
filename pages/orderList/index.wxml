@@ -8,7 +8,7 @@
 </cu-custom>
 <scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
   style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
-  bindtoload="toload">
+  bindtoload="toload" bindtap="cancelFn">
   <view class="{{count?'con':'iconNone'}}">
     <view class="orderDate">
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="{{'text'}}">
@@ -109,7 +109,7 @@
   </view>
   <noData isFlag="{{isFlag}}"></noData>
 </scroll-y>
-<ball ballList="{{ballList}}" bind:bindBallFn="bindBallFn"/>  
+<ball id="ball" ballList="{{ballList}}" bind:bindBallFn="bindBallFn"/>  
 <!-- 悬浮球 -->
 <!-- <view class='refresh' catchtouchmove="buttonMove" bindtouchstart="buttonStart" bindtouchend="buttonEnd"
   catchtap="bindBall" style="top:{{ btnTop }}px;left:{{ btnLeft }}px">

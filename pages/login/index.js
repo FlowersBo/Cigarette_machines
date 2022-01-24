@@ -296,11 +296,11 @@ Page({
                 wx.switchTab({
                   url: '../user/index'
                 });
-              } else if (resp.data.message) {
+              } else{
                 wx.showToast({
                   title: resp.data.message,
                   icon: 'none',
-                  duration: 1000
+                  duration: 2000
                 });
               }
             })
@@ -309,7 +309,7 @@ Page({
               wx.showToast({
                 title: '网络错误，请稍后重试',
                 icon: 'none',
-                duration: 1000
+                duration: 2000
               });
             })
         })
